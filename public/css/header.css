@@ -12,6 +12,7 @@ header.main_header {
     left: 0;
     padding: 0.5rem 1rem;
     box-shadow: 0 5px 10px rgba(35, 179, 232, 0.3);
+    font-family: var(--font-roboto);
 }
 
 /* Header Logo */
@@ -37,10 +38,6 @@ header.main_header .header_menuButton button{
     font-size: 1.5rem;
 }
 
-/* header.main_header .header_menu{
-    display: none
-} */
-
 header.main_header .header_menu {
     position: fixed;
     top: 0;
@@ -48,6 +45,11 @@ header.main_header .header_menu {
     width: 100%;
     height: 100vh;
     background-color: white;
+    padding: 1rem;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
 }
 
 header.main_header .header_menu .header_menuClose {
@@ -70,8 +72,8 @@ header.main_header .header_menu .header_avatar {
     height: 4rem;
     border-radius: 50%;
     background-color: var(--color-primary);
-    margin: 0 auto;
     position: relative;
+    margin-bottom: 1rem;
 }
 
 header.main_header .header_menu .header_avatar .avatar_session {
@@ -84,6 +86,156 @@ header.main_header .header_menu .header_avatar .avatar_session {
     height: 10px;
 }
 
+/* SearchBar */
 
+header.main_header .header_menu .header_searchBar {
+    border-radius: 5px;
+    border: 1px solid var(--color-primary);
+    padding: 0.5rem;
+}
+
+header.main_header .header_menu .header_searchBar form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header.main_header .header_menu .header_searchBar form input {
+    border: none;
+}
+
+header.main_header .header_menu .header_searchBar form input:focus {
+    outline: none;
+} 
+
+header.main_header .header_menu .header_searchBar form input::placeholder {
+    text-transform: uppercase;
+    color: var(--color-primary);
+}
+
+header.main_header .header_menu .header_searchBar form button {
+    background-color: white;
+    border: none;
+    border-radius: 5px;
+    color: var(--color-primary);
+    font-size: 1.2rem;
+    height: 2rem;
+    width: 2rem;
+    transition: all 0.5s ease-in;
+}
+
+header.main_header .header_menu .header_searchBar form button:hover {
+    background-color: rgba(35, 179, 232, 0.1);
+}
+
+/* END SearchBar */
+/* Menu List */
+
+header.main_header .header_menu ul.menu_list {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+header.main_header .header_menu ul.menu_list li{
+    width: 14rem;
+    text-align: center;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.5s ease-in;
+}
+
+header.main_header .header_menu ul.menu_list li:hover {
+    background-color: rgba(35, 179, 232, 0.1);
+}
+
+header.main_header .header_menu ul.menu_list li a {
+    color: var(--color-primary);
+    text-transform: uppercase;
+    font-size: 1.3rem;
+}
+
+/* END Menu List */
+
+/* Animations */
+
+@keyframes menuFadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+header.main_header .header_menu.active {
+    display: flex;
+    opacity: 1;
+    animation: menuFadeIn 1s;
+}
+
+/* END Animations */
+
+/* Media queries */
+/* Desktop */
+
+@media (min-width: 992px) {
+    
+    header.main_header {
+        height: 6rem;
+        padding: 0.5rem 2rem;
+    }
+
+    header.main_header .header_logo {
+        width: 70px;
+    }
+
+    
+    header.main_header .header_menu {
+        position: initial;
+        height: auto;
+        padding: 0;
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        opacity: 1;
+    }
+
+    header.main_header .header_menu .header_menuClose {
+        display: none;
+    }
+
+    header.main_header .header_menuButton {
+        display: none;
+    }
+
+    header.main_header .header_menu ul.menu_list {
+        flex-direction: row;
+        flex-grow: 0.5;
+    }
+
+    header.main_header .header_menu ul.menu_list li{
+        width: auto;
+    }
+
+    header.main_header .header_menu ul.menu_list li a {
+        font-size: 1rem;
+    }
+    
+    header.main_header .header_menu .header_avatar {
+        margin-bottom: 0;
+        /* order: 2; */
+    }
+
+    header.main_header .header_menu .header_searchBar {
+      /*  order: 1; */
+    }
+
+}
 
 
