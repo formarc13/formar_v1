@@ -1,0 +1,34 @@
+[
+    {
+        "id": 1,
+        "name": "Emprendimiento 1",
+        "address": "Calle falsa 123",
+        "members": ["Jorge", "Ana"],
+        "phone": "151515151515",
+        "description": "AKLdjscnbwke mned khjwr jkeqnd "
+    },
+    {
+        "id": 2,
+        "name": "Emprendimiento 2",
+        "address": "Calle falsa 123",
+        "members": ["Jorge", "Ana"],
+        "phone": "151515151515",
+        "description": "AKLdjscnbwke mned khjwr jkeqnd "
+    },
+    {
+        "id": 3,
+        "name": "Emprendimiento 3",
+        "address": "Calle falsa 123",
+        "members": ["Jorge", "Ana"],
+        "phone": "151515151515",
+        "description": "AKLdjscnbwke mned khjwr jkeqnd "
+    },
+    {
+        "id": 4,
+        "name": "Emprendimiento 4",
+        "address": "Calle falsa 123",
+        "members": ["Jorge", "Ana"],
+        "phone": "151515151515",
+        "description": "AKLdjscnbwke mned khjwr jkeqnd "
+    }
+]
