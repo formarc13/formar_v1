@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3000;
 const indexRouter = require('./routes/indexRouter');
 const productsRouter = require('./routes/productsRouter')
 
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, '../public')))
 
 /* Middlewares de Rutas */
 app.use('/', indexRouter) // HOME - Contact 

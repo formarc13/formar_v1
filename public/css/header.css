@@ -8,6 +8,7 @@ header.main_header {
     align-items: center;
     width: 100%;
     position: fixed;
+    z-index: 999;
     top: 0;
     left: 0;
     padding: 0.5rem 1rem;
@@ -225,15 +226,6 @@ header.main_header .header_menu.active {
 
     header.main_header .header_menu ul.menu_list li a {
         font-size: 1rem;
-    }
-    
-    header.main_header .header_menu .header_avatar {
-        margin-bottom: 0;
-        /* order: 2; */
-    }
-
-    header.main_header .header_menu .header_searchBar {
-      /*  order: 1; */
     }
 
 }

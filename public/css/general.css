@@ -13,5 +13,11 @@ a {
 }
 
 body {
-    width: 100vh;
+    padding-top: 4rem;
+}
+
+@media (min-width: 992px) {
+    body {
+        padding-top: 6rem;
+    }
 }

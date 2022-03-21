@@ -5,9 +5,6 @@ footer.main_footer {
     flex-direction: column-reverse;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    bottom: 0;
-    left: 0;
     width: 100%;
     background-color: var(--color-primary);
 }
