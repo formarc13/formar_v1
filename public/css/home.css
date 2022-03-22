@@ -21,6 +21,7 @@
     width: 100%;
     padding: 1rem;
     overflow-x: scroll;
+    display: flex;
 }
 
 .products__container .products__card {

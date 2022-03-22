@@ -7,7 +7,7 @@
         "categoryId": 1,
         "projectId": 1,
         "discount": 10,
-        "image": "foto.jpg",
+        "image": "desayuno.jpg",
         "stock": true
     },
     {
@@ -18,7 +18,7 @@
         "categoryId": 2,
         "projectId": 2,
         "discount": 5,
-        "image": "foto.jpg",
+        "image": "desayuno.jpg",
         "stock": true
     },
     {
@@ -29,7 +29,7 @@
         "categoryId": 3,
         "projectId": 3,
         "discount": 10,
-        "image": "foto.jpg",
+        "image": "desayuno.jpg",
         "stock": true
     },
     {
@@ -40,7 +40,7 @@
         "categoryId": 4,
         "projectId": 4,
         "discount": 15,
-        "image": "foto.jpg",
+        "image": "desayuno.jpg",
         "stock": true
     },
     {
@@ -51,7 +51,7 @@
         "categoryId": 3,
         "projectId": 3,
         "discount": 50,
-        "image": "foto.jpg",
+        "image": "desayuno.jpg",
         "stock": true
     }
 ]

@@ -11,6 +11,11 @@ const productsRouter = require('./routes/productsRouter')
 
 app.use(express.static(path.join(__dirname, '../public')))
 
+/* Views config */
+app.set('view engine', 'ejs')
+app.set('views', path.join(__dirname, "views"))
+
+
 /* Middlewares de Rutas */
 app.use('/', indexRouter) // HOME - Contact 
 app.use('/productos', productsRouter) // Listado, detalle

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formar</title>
+    <title><%= titulo %></title>
     <!-- Font awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
     <!-- Bootstrap -->
@@ -74,15 +74,17 @@
         <!-- End Carousel -->
         <!-- On Sale -->
         <section class="products__container">
-            <h2>Productos destacados</h2>
-            <article class="products__card">
-                <div class="card__image--container">
-                    <img src="images/desayuno.jpg" alt="">
-                </div>
-                <strong>Desayuno</strong>
-                <p>$ 3000</p>
-                <p>Lorem ipsum dolor sit amet consectetur.</p>
-            </article>
+            <!-- <h2> <%= products_title %> </h2> -->
+            <% productos.forEach(producto => { %>
+                <article class="products__card">
+                    <div class="card__image--container">
+                        <img src="images/<%= producto.image %>" alt="">
+                    </div>
+                    <strong><%= producto.name %> </strong>
+                    <p>$ <%= producto.price %> </p>
+                    <p><%= producto.description %></p>
+                </article>
+            <% }) %>
         </section>
         <!-- End On Sale -->
         <!-- Projects -->
