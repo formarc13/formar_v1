@@ -21,8 +21,7 @@ app.set('views', path.join(__dirname, "views"))
 /* Middlewares de Rutas */
 app.use('/', indexRouter) // HOME - Contact 
 app.use('/productos', productsRouter) // Listado, detalle
-app.use('/usuarios', usersRouter) // login, registro, perfil
-app.use('/admin', adminRouter) // administrador
+
 
 app.listen(PORT, () => console.log(`
 Server listen port ${PORT}
