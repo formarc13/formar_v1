@@ -6,7 +6,7 @@
         "description": "Las mejores pantuflas del condado",
         "categoryId": 1,
         "projectId": 1,
-        "discount": 10,
+        "discount": 0,
         "image": "desayuno.jpg",
         "stock": true
     },
