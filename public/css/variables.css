@@ -4,4 +4,7 @@
     --font-bebas: 'Bebas Neue', cursive;
     --font-roboto: 'Roboto', sans-serif;
     --color-primary: rgb(35, 179, 232);
+    --color-text: rgb(53, 68, 72);
+    --size-title: 40px;
+    --size-paragraph: 20px;
 }

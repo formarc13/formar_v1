@@ -1,53 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <link rel="shortcut icon" href="images/formar_logo1.png" type="image/x-icon">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= titulo %></title>
-    <!-- Font awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="/css/style.css">
-</head>
+    <%- include('partials/head')  %> 
 <body>
-    <header class="main_header">
-        <div class="header_logo">
-            <a href="/">
-                <img src="images/formar_logo1.png" alt="logo formar">
-            </a>
-        </div>
-        <div class="header_menuButton">
-            <button>
-                <i class="fa-solid fa-ellipsis-vertical"></i>
-            </button>
-        </div>
-        <nav class="header_menu">
-            <div class="header_menuClose">
-                <i class="fa-solid fa-xmark"></i>
-            </div>
-            <div class="header_avatar">
-                <div class="avatar_session"></div>
-            </div>
-            <div class="header_searchBar">
-                <form action="">
-                    <input type="text" placeholder="buscar">
-                    <button type="submit">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </button>
-                </form>
-            </div>
-            <ul class="menu_list">
-                <li><a href="">Conocenos</a></li>
-                <li><a href="">Emprendimientos</a></li>
-                <li><a href="">Contacto</a></li>
-                <li><a href="">Ingresá</a></li>
-            </ul>
-        </nav>
-    </header>
+    <%- include('partials/header')  %> 
     <main class="home__mainContainer">
         <!-- Carousel -->
         <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
@@ -73,56 +28,14 @@
           </div>
         <!-- End Carousel -->
         <!-- On Sale -->
-        <section class="products__container">
-            <!-- <h2> <%= products_title %> </h2> -->
-            <% productos.forEach(producto => { %>
-                <article class="products__card">
-                    <div class="card__image--container">
-                        <img src="images/<%= producto.image %>" alt="">
-                    </div>
-                    <strong><%= producto.name %> </strong>
-                    <p>$ <%= producto.price %> </p>
-                    <p><%= producto.description %></p>
-                </article>
-            <% }) %>
-        </section>
+    <%- include('partials/productsSlider')  %> 
         <!-- End On Sale -->
         <!-- Projects -->
         <!-- End projects -->
     </main>
 
-    <footer class="main_footer">
-        <section class="footer_formarImage">
-            <img src="images/formar_img.png" alt="">
-        </section>
-        <section class="footer_socialMedia-container">
-            <div class="footer_socialMedia-icon">
-                <a href="https://www.instagram.com/fundacionformar/" target="_blank">
-                    <i class="fa-brands fa-instagram"></i>
-                </a>
-            </div>
-            <div class="footer_socialMedia-icon">
-                <a href="https://www.facebook.com/Fundacion-Formar-269783010205963/" target="_blank">
-                    <i class="fa-brands fa-facebook"></i>
-                </a>
-            </div>
-            <div class="footer_socialMedia-icon">
-                <a href="https://www.linkedin.com/in/fundacion-formar-371034198/" target="_blank">
-                    <i class="fa-brands fa-linkedin"></i>
-                </a>
-            </div>
-            <div class="footer_socialMedia-icon">
-                <a href="">
-                    <i class="fa-brands fa-whatsapp"></i>
-                </a>
-            </div>
-        </section>
-    </footer>
+    <%- include('partials/footer')  %> 
+    <%- include('partials/scripts')  %> 
 
-
-    <!-- Bootstrap Script -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <!-- Scripts -->
-    <script src="js/header.js"></script>
 </body>
 </html>
