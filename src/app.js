@@ -10,7 +10,9 @@ const indexRouter = require('./routes/indexRouter');
 const productsRouter = require('./routes/productsRouter');
 const usersRouter = require('./routes/usersRouter');
 
-app.use(express.static(path.join(__dirname, '../public')))
+app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.urlencoded({extended: false}));
+app.use(express.json());
 
 /* Views config */
 app.set('view engine', 'ejs')

@@ -2,10 +2,11 @@ const express = require('express');
 const router = express.Router();
 const usersController = require('../controllers/usersController');
 
-/* Ruta login */
+/* GET - Renderiza vista login */
 router.get('/login', usersController.login);
-/* Ruta registro */
-router.get('/registro', usersController.register)
-
+/* GET - Renderiza vista registro */
+router.get('/registro', usersController.register);
+/* POST - Crea un nnuevo usuario */
+router.post('/registro', usersController.processRegister)
 
 module.exports = router;
