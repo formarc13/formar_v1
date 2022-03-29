@@ -6,9 +6,11 @@ require('dotenv').config();
 const PORT = process.env.PORT || 3000;
 
 /* Enrutadores */
-const indexRouter = require('./routes/indexRouter');
-const productsRouter = require('./routes/productsRouter');
-const usersRouter = require('./routes/usersRouter');
+const indexRouter = require('./routes');
+const productsRouter = require('./routes/products');
+const usersRouter = require('./routes/users');
+const projectsRouter = require('./routes/projects');
+const adminRouter = require('./routes/admin');
 
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.urlencoded({extended: false}));
@@ -18,11 +20,12 @@ app.use(express.json());
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, "views"))
 
-
 /* Middlewares de Rutas */
-app.use('/', indexRouter) // HOME - Contact 
-app.use('/productos', productsRouter) // Listado, detalle
-app.use('/usuarios', usersRouter) //Login, registro, perfil
+app.use('/', indexRouter); // HOME - Contact 
+app.use('/productos', productsRouter); // Listado, detalle
+app.use('/usuarios', usersRouter); //Login, registro, perfil
+app.use('/projectos', projectsRouter);
+app.use('/admin', adminRouter);
 
 app.listen(PORT, () => console.log(`
 Server listen port ${PORT}

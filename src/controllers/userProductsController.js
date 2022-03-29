@@ -1,0 +1,10 @@
+const { getProducts } = require('../data');
+
+module.exports = {
+    list: (req, res) => {
+        
+    },
+    detail: (req, res) => {
+     
+    },
+};
