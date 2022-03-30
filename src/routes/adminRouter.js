@@ -13,6 +13,7 @@ router.get('/', adminController.index);
 router.get('/productos', adminProductsController.list);
 /* GET - Agregar producto */
 router.get('/productos/agregar', adminProductsController.productAdd);
-
+/* POST - Crea un producto en la DB */
+router.post('/productos', adminProductsController.productCreate);
 
 module.exports = router;

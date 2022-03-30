@@ -4,9 +4,55 @@
 <body>
   <%- include('../partials/header') %> 
   
-      <main class="container min-vh-100">
-        <h1>Editar producto</h1>
-      </main>
+  <main class="container min-vh-100 pt-5">
+    <fieldset class="rounded border w-75 mx-auto p-4">
+      <legend class="text-center">AGREGAR PRODUCTO</legend>
+      <form class="row " action="/admin/productos" method="POST">
+        <div class="mb-3 col-md-6">
+          <label for="name" class="form-label">Nombre del producto</label>
+          <input type="text" name="name" class="form-control" id="name" placeholder="Ej: Pantuflas">
+        </div>
+        <div class="mb-3 col-md-6">
+          <label for="price" class="form-label">Precio</label>
+          <input type="number" name="price" class="form-control" id="price" placeholder="Ej: 1500">
+        </div>
+        <div class="mb-3 col-md-6">
+          <label for="discount" class="form-label">Descuento</label>
+          <input type="number" name="discount" class="form-control" id="discount" placeholder="Ej: 1500">
+        </div>
+        <div class="mb-3 col-md-6">
+          <label for="category" class="form-label">Categorias</label>
+          <select name="categoryId" class="form-select" id="category" aria-label="Default select example">
+            <option selected hidden>Categoría</option>
+            <option value="1">Textil - Indumentaria</option>
+            <option value="2">Alimentos y bebidas</option>
+            <option value="3">Artesanías</option>
+          </select>
+        </div>
+        <div class="mb-3 col-md-6">
+          <label for="project" id="project" class="form-label">Projectos</label>
+          <select name="projectId" class="form-select" aria-label="Default select example">
+            <option selected hidden>Projecto</option>
+            <option value="1">Emprendimiento 1</option>
+            <option value="2">Emprendimiento 2</option>
+            <option value="3">Emprendimiento 3</option>
+          </select>
+        </div>
+        <div class="form-check mb-3 form-switch">
+          <input class="form-check-input" name="stock" type="checkbox" role="switch" id="stock">
+          <label class="form-check-label" for="stock">Stock disponible</label>
+        </div>
+        <div class="mb-3 ">
+          <label for="description" class="form-label">Descripción</label>
+          <textarea name="description" class="form-control" id="description" rows="3"></textarea>
+        </div>
+        <div class="col-12">
+          <button class="btn btn-primary" type="submit">Crear</button>
+        </div>
+       </form>
+    </fieldset>
+  
+  </main>
 
       <%- include('../partials/footer') %> 
       
