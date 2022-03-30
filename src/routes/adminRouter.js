@@ -15,5 +15,9 @@ router.get('/productos', adminProductsController.list);
 router.get('/productos/agregar', adminProductsController.productAdd);
 /* POST - Crea un producto en la DB */
 router.post('/productos', adminProductsController.productCreate);
+/* GET - Editar producto */
+router.get('/productos/editar/:id', adminProductsController.productEdit);
+/* PUT - Actualiza producto en la DB */
+router.put('/productos/:id', adminProductsController.productUpdate)
 
 module.exports = router;

@@ -6,19 +6,19 @@
   
   <main class="container min-vh-100 pt-5">
     <fieldset class="rounded border w-75 mx-auto p-4">
-      <legend class="text-center">AGREGAR PRODUCTO</legend>
+      <legend class="text-center">EDITAR PRODUCTO: <%= producto.name %> </legend>
       <form class="row " action="/admin/productos" method="POST">
         <div class="mb-3 col-md-6">
           <label for="name" class="form-label">Nombre del producto</label>
-          <input type="text" name="name" class="form-control" id="name" placeholder="Ej: Pantuflas">
+          <input type="text" name="name" class="form-control" id="name" placeholder="Ej: Pantuflas" value="<%= producto.name %>">
         </div>
         <div class="mb-3 col-md-6">
           <label for="price" class="form-label">Precio</label>
-          <input type="number" name="price" class="form-control" id="price" placeholder="Ej: 1500">
+          <input type="number" name="price" class="form-control" id="price" placeholder="Ej: 1500" value="<%= producto.price %>">
         </div>
         <div class="mb-3 col-md-6">
           <label for="discount" class="form-label">Descuento</label>
-          <input type="number" name="discount" class="form-control" id="discount" placeholder="Ej: 1500">
+          <input type="number" name="discount" class="form-control" id="discount" placeholder="Ej: 1500" value="<%= producto.discount %>">
         </div>
         <div class="mb-3 col-md-6">
           <label for="category" class="form-label">Categorias</label>
@@ -38,13 +38,13 @@
             <option value="3">Emprendimiento 3</option>
           </select>
         </div>
-        <div class="form-check mb-3 form-switch">
-          <input class="form-check-input" name="stock" type="checkbox" role="switch" id="stock">
+        <div class="form-check mx-3 mb-3 form-switch">
+          <input <%= producto.stock ? "checked" : "" %>  class="form-check-input" name="stock" type="checkbox" role="switch" id="stock">
           <label class="form-check-label" for="stock">Stock disponible</label>
         </div>
         <div class="mb-3 ">
           <label for="description" class="form-label">Descripción</label>
-          <textarea name="description" class="form-control" id="description" rows="3"></textarea>
+          <textarea name="description" class="form-control" id="description" rows="3"><%= producto.description %></textarea>
         </div>
         <div class="col-12">
           <button class="btn btn-primary" type="submit">Crear</button>

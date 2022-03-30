@@ -57,11 +57,23 @@ module.exports = {
     },
     /* Envia la vista de form de edición de producto */
     productEdit: (req, res) => {
-
+        /* 1 - Obtener el id del producto */
+        let idProducto = +req.params.id;
+        /* 2 - Buscar el producto a editar */
+        let producto = getProducts.find(producto => producto.id === idProducto)
+        /* 3 - Mostrar el producto en la vista */
+        res.render('admin/products/editProduct', {
+            titulo: "Edición",
+            producto
+        })
     },
     /* Recibe los datos actualizados del form de edición */
     productUpdate: (req, res) => {
-
+        /* 1 - Obtener el id del producto */
+        /* 2 - Buscar el producto a editar */
+        /* 3 - Modificar el producto */
+        /* 4 - Guardar los cambios */
+        /* 5 - Respuesta */
     },
     /* Recibe la info del producto a eliminar */
     productDelete: (req, res) => {
