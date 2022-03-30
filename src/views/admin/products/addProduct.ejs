@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head') %> 
+<body>
+  <%- include('../partials/header') %> 
+  
+      <main class="container min-vh-100 pt-5">
+       <form class="row" action="" method="">
+        <div class="mb-3 col-md-6">
+          <label for="name" class="form-label">Nombre del producto</label>
+          <input type="text" name="name" class="form-control" id="name" placeholder="Ej: Pantuflas">
+        </div>
+        <div class="mb-3 col-md-6">
+          <label for="price" class="form-label">Precio</label>
+          <input type="number" name="price" class="form-control" id="price" placeholder="Ej: 1500">
+        </div>
+        <div class="mb-3 col-md-6">
+          <label for="discount" class="form-label">Descuento</label>
+          <input type="number" name="discount" class="form-control" id="discount" placeholder="Ej: 1500">
+        </div>
+        <div class="mb-3 col-md-6">
+          <select name="categoryId" class="form-select" aria-label="Default select example">
+            <option selected hidden>Categoría</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+        <div class="mb-3 col-md-6">
+          <select name="projectId" class="form-select" aria-label="Default select example">
+            <option selected hidden>Projecto</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+        <div class="form-check form-switch col-md-6">
+          <input class="form-check-input" name="stock" type="checkbox" role="switch" id="stock">
+          <label class="form-check-label" for="stock">Stock disponible</label>
+        </div>
+        <div class="mb-3 col-md-6">
+          <label for="description" class="form-label">Descripción</label>
+          <textarea name="description" class="form-control" id="description" rows="3"></textarea>
+        </div>
+       </form>
+      </main>
+
+      <%- include('../partials/footer') %> 
+      
+      <%- include('../partials/scripts') %> 
+
+</body>
+</html>
