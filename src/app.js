@@ -4,6 +4,7 @@ const path = require('path');
 const process = require('process');
 require('dotenv').config();
 const PORT = process.env.PORT || 3000;
+const methodOverride = require('method-override');
 
 /* Enrutadores */
 const indexRouter = require('./routes/indexRouter');
@@ -14,6 +15,7 @@ const adminRouter = require('./routes/adminRouter');
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
+app.use(methodOverride('_method'));
 
 /* Views config */
 app.set('view engine', 'ejs')
