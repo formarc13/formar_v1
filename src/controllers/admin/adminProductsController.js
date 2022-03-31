@@ -70,10 +70,25 @@ module.exports = {
     /* Recibe los datos actualizados del form de edición */
     productUpdate: (req, res) => {
         /* 1 - Obtener el id del producto */
-        /* 2 - Buscar el producto a editar */
-        /* 3 - Modificar el producto */
-        /* 4 - Guardar los cambios */
-        /* 5 - Respuesta */
+        let idProducto = +req.params.id;
+        /* 2 - Buscar el producto a editar y modificar el producto */
+        getProducts.forEach(producto => {
+            if(producto.id === idProducto){
+                producto.name = req.body.name
+                producto.price = req.body.price
+                producto.discount = req.body.discount
+                producto.categoryId = req.body.categoryId
+                producto.projectId = req.body.projectId
+                producto.stock = req.body.stock ? true : false
+                producto.description = req.body.description
+            }
+        })
+
+        /* 3 - Guardar los cambios */
+        writeProducts(getProducts);
+
+        /* 4 - Respuesta */
+        res.redirect('/admin/productos');
     },
     /* Recibe la info del producto a eliminar */
     productDelete: (req, res) => {
