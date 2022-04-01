@@ -4,30 +4,30 @@ const path = require('path');
 const process = require('process');
 require('dotenv').config();
 const PORT = process.env.PORT || 3000;
+const methodOverride = require('method-override');
 
 /* Enrutadores */
-const indexRouter = require('./routes');
-const productsRouter = require('./routes/products');
-const usersRouter = require('./routes/users');
-const projectsRouter = require('./routes/projects');
-const adminRouter = require('./routes/admin');
+const indexRouter = require('./routes/indexRouter');
+const productsRouter = require('./routes/productsRouter');
+const usersRouter = require('./routes/usersRouter');
+const adminRouter = require('./routes/adminRouter');
 
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
+app.use(methodOverride('_method'));
 
 /* Views config */
 app.set('view engine', 'ejs')
-app.set('views', path.join(__dirname, "views"))
+app.set('views', path.join(__dirname, "views"));
 
 /* Middlewares de Rutas */
 app.use('/', indexRouter); // HOME - Contact 
 app.use('/productos', productsRouter); // Listado, detalle
 app.use('/usuarios', usersRouter); //Login, registro, perfil
-app.use('/projectos', projectsRouter);
-app.use('/admin', adminRouter);
+app.use('/admin', adminRouter); // Admin, ABM Productos, ABM Projectos
 
 app.listen(PORT, () => console.log(`
 Server listen port ${PORT}
 http://localhost:${PORT}
-`))
+`));
