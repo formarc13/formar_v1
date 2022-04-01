@@ -92,7 +92,15 @@ module.exports = {
     },
     /* Recibe la info del producto a eliminar */
     productDelete: (req, res) => {
-
+        let idProducto = +req.params.id;
+        getProducts.forEach(product=>{
+            if(product.id === idProducto){
+                let productToDelete = getProducts.indexOf(product);
+                getProducts.splice(productToDelete,1);
+            }
+        });
+        writeProducts(getProducts);
+        res.redirect('/admin/productos')
     },
     /* Recibe los datos del producto a buscar */
     productSearch: (req, res) => {
