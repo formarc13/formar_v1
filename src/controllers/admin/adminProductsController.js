@@ -92,14 +92,20 @@ module.exports = {
     },
     /* Recibe la info del producto a eliminar */
     productDelete: (req, res) => {
+        /* 1 - Obtener el id del producto a eliminar */
         let idProducto = +req.params.id;
-        getProducts.forEach(product=>{
-            if(product.id === idProducto){
-                let productToDelete = getProducts.indexOf(product);
-                getProducts.splice(productToDelete,1);
+        /* 2 - Buscar el producto dentro del array y eliminarlo */
+        getProducts.forEach(producto => {
+            if(producto.id === idProducto){
+                //Obtener la ubicación (índice) del producto a eliminar
+                let productToDeleteIndex = getProducts.indexOf(producto);
+                //Elimino el producto del array
+                getProducts.splice(productToDeleteIndex, 1)
             }
-        });
+        })
+        /* 3 - Sobreescribir el json */
         writeProducts(getProducts);
+        /* 4 - Enviar respuesta  */
         res.redirect('/admin/productos')
     },
     /* Recibe los datos del producto a buscar */
