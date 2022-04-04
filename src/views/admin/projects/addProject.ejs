@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head') %> 
+<body>
+  <%- include('../partials/header') %> 
+  
+      <main class="container min-vh-100 pt-5">
+        <fieldset class="rounded border w-75 mx-auto p-4">
+          <legend class="text-center">AGREGAR EMPRENDIMIENTO</legend>
+          <form class="row " action="" method="POST">
+            <div class="mb-3 col-md-6">
+              <label for="name" class="form-label">Nombre del emprendimiento</label>
+              <input type="text" name="name" class="form-control" id="name" placeholder="Ej: Microsoft">
+            </div>
+            <div class="mb-3 col-md-6">
+              <label for="address" class="form-label">Dirección</label>
+              <input type="text" name="address" class="form-control" id="address" placeholder="Ej: Calle falsa 123">
+            </div>
+            <div class="mb-3 col-md-6">
+              <label for="phone" class="form-label">Teléfono</label>
+              <input type="text" name="phone" class="form-control" id="phone" placeholder="Ej: 1555555555g">
+            </div>
+            <div class="mb-3 col-md-6">
+              <label for="category" class="form-label">Categorias</label>
+              <select name="categoryId" class="form-select" id="category" aria-label="Default select example">
+                <option selected hidden>Categoría</option>
+                <option value="1">Textil - Indumentaria</option>
+                <option value="2">Alimentos y bebidas</option>
+                <option value="3">Artesanías</option>
+              </select>
+            </div>
+            <div class="mb-3 ">
+              <label for="description" class="form-label">Descripción</label>
+              <textarea name="description" class="form-control" id="description" rows="3"></textarea>
+            </div>
+            <div class="col-12">
+              <button class="btn btn-primary" type="submit">Crear</button>
+            </div>
+           </form>
+        </fieldset>
+      
+      </main>
+
+      <%- include('../partials/footer') %> 
+      
+      <%- include('../partials/scripts') %> 
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head') %> 
+<body>
+  <%- include('../partials/header') %> 
+  
+      <main class="container min-vh-100 pt-5">
+        <fieldset class="rounded border w-75 mx-auto p-4">
+          <legend class="text-center">AGREGAR CATEGORÍA</legend>
+          <form class="row " action="" method="POST">
+            <div class="mb-3 col-md-6">
+              <label for="name" class="form-label">Nombre de la categoría</label>
+              <input type="text" name="name" class="form-control" id="name" placeholder="Ej: Textil">
+            </div>
+            <div class="col-12">
+              <button class="btn btn-primary" type="submit">Crear</button>
+            </div>
+           </form>
+        </fieldset>
+      </main>
+
+      <%- include('../partials/footer') %> 
+      
+      <%- include('../partials/scripts') %> 
+
+</body>
+</html>
