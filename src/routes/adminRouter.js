@@ -39,6 +39,18 @@ router.put('/emprendimientos/:id', adminProjectsController.projectUpdate);
 /* DELETE - Elimina un emprendimiento */
 router.delete('/emprendimientos/eliminar/:id', adminProjectsController.projectDelete);
 
-
+/* =============== */
+/* CRUD CATEGORIAS */
+/* =============== */
+/* 
+    1- Crear rutas del CRUD
+    2- Crear controlador con métodos del CRUD y de vistas de formularios
+    3- Renderizar vista de lista de categorias
+    4- Renderizar vista de form de creacion
+    5- Escribir método de creación de categoría
+    6- Renderizar vista de form de edición
+    7- Escribir método de actualización de categoría
+    8- Escribir método de eliminación de categoría
+*/
 
 module.exports = router;
