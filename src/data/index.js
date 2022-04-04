@@ -8,6 +8,9 @@ module.exports = {
     },
     getCategories: JSON.parse(fs.readFileSync(path.join(__dirname, "/categories.json"), "utf-8")),
     getProjects: JSON.parse(fs.readFileSync(path.join(__dirname, "/projects.json"), "utf-8")),
+    writeProjects: (data) => {
+        fs.writeFileSync(path.join(__dirname, "/projects.json"), JSON.stringify(data));
+    },
     getUsers: JSON.parse(fs.readFileSync(path.join(__dirname, "/users.json"), "utf-8")),
     writeUsers: (data) => {
         fs.writeFileSync(path.join(__dirname, "/users.json"), JSON.stringify(data));

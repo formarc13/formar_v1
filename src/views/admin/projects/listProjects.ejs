@@ -18,26 +18,30 @@
               </tr>
             </thead>
             <tbody>
-        
+              <% emprendimientos.forEach(emprendimiento => { %>
                 <tr>
-                  <th scope="row"></th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <th scope="row"><%- emprendimiento.id %></th>
+                  <td><%- emprendimiento.name %></td>
+                  <td><%- emprendimiento.address %></td>
+                  <td><%- emprendimiento.categoryId %></td>
                   <td>
-                    <a href="" class="btn btn-success">
+                    <% emprendimiento.members.forEach(miembro => { %>
+                      <%- miembro %> 
+                    <% }) %>
+                  </td>
+                  <td><%- emprendimiento.phone %></td>
+                  <td>
+                    <a href="/admin/emprendimientos/editar/<%- emprendimiento.id %> " class="btn btn-success">
                       <i class="fa-solid fa-pen-to-square"></i>
                     </a>
-                    <form action="" method="post">
+                    <form action="/admin/emprendimientos/eliminar/<%- emprendimiento.id %>?_method=DELETE" method="post">
                       <button class="btn btn-danger" type="submit">
                         <i class="fa-solid fa-trash-can"></i>
                       </button>
                     </form>
                   </td>
                 </tr>
-          
+              <% }) %>
             </tbody>
           </table>
       </main>
