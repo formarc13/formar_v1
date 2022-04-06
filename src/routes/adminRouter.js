@@ -3,6 +3,7 @@ const router = express.Router();
 const adminController = require('../controllers/admin/adminController');
 const adminProductsController = require('../controllers/admin/adminProductsController');
 const adminProjectsController = require('../controllers/admin/adminProjectsController');
+const adminCategoriesController = require('../controllers/admin/adminCategoriesController');
 
 /* GET - Index */
 router.get('/', adminController.index);
@@ -42,15 +43,17 @@ router.delete('/emprendimientos/eliminar/:id', adminProjectsController.projectDe
 /* =============== */
 /* CRUD CATEGORIAS */
 /* =============== */
-/* 
-    1- Crear rutas del CRUD
-    2- Crear controlador con métodos del CRUD y de vistas de formularios
-    3- Renderizar vista de lista de categorias
-    4- Renderizar vista de form de creacion
-    5- Escribir método de creación de categoría
-    6- Renderizar vista de form de edición
-    7- Escribir método de actualización de categoría
-    8- Escribir método de eliminación de categoría
-*/
+
+router.get('/categorias', adminCategoriesController.list);
+/* GET - Agregar emprendimiento */
+router.get('/categorias/agregar', adminCategoriesController.categoryAdd);
+/* POST - Crea un emprendimiento en la DB */
+router.post('/categorias', adminCategoriesController.categoryCreate);
+/* GET - Editar emprendimiento */
+router.get('/categorias/editar/:id', adminCategoriesController.categoryEdit);
+/* PUT - Actualiza emprendimiento en la DB */
+router.put('/categorias/:id', adminCategoriesController.categoryUpdate);
+/* DELETE - Elimina un emprendimiento */
+router.delete('/categorias/eliminar/:id', adminCategoriesController.categoryDelete);
 
 module.exports = router;

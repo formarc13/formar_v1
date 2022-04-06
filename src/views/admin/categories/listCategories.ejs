@@ -4,29 +4,32 @@
 <body>
   <%- include('../partials/header') %> 
   
-      <main class="container min-vh-100 pt-5">
+      <main class="container w-25 pt-5">
         <table class="table table-striped table-hover">
             <thead>
               <tr>
                 <th scope="col">id</th>
                 <th scope="col">Nombre</th>
+                <th scope="col">Acciones</th>
               </tr>
             </thead>
             <tbody>
+              <% categorias.forEach(categoria => { %>
                 <tr>
-                  <th scope="row"></th>
-                  <td></td>
+                  <th scope="row"><%- categoria.id %></th>
+                  <td><%- categoria.name %></td>
                   <td>
-                    <a href="" class="btn btn-success">
+                    <a href="/admin/categorias/editar/<%= categoria.id %>" class="btn btn-success">
                       <i class="fa-solid fa-pen-to-square"></i>
                     </a>
-                    <form action="" method="post">
+                    <form action="/admin/categorias/eliminar/<%= categoria.id %>?_method=DELETE" method="post">
                       <button class="btn btn-danger" type="submit">
                         <i class="fa-solid fa-trash-can"></i>
                       </button>
                     </form>
                   </td>
                 </tr>
+              <% }) %>
             </tbody>
           </table>
       </main>
