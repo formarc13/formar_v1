@@ -27,22 +27,10 @@ module.exports = {
         let newProduct = {
             ...req.body, 
             id: lastId + 1,
-            image: "desayuno.jpg",
+            image: req.file ? req.file.filename : "default-image.png",
             stock: req.body.stock ? true : false
         }
         
-        /* let newProduct = {
-            id: lastId + 1,
-            name: req.body.name,
-            price: req.body.price,
-            description: req.body.description,
-            categoryId: req.body.categoryId,
-            projectId: req.body.projectId,
-            discount: req.body.discount,
-            image: "desayuno.jpg",
-            stock: req.body.stock ? true : false
-        } */
-
         // Paso 2 - Guardar el nuevo producto en el array de usuarios
 
         getProducts.push(newProduct)
