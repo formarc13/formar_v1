@@ -1,11 +1,11 @@
-const { getProducts, writeProducts } = require('../../data');
+const { products, writeProducts } = require('../../data');
 
 module.exports = {
     /* Envia la vista de listado de productos */
     list: (req, res) => {
         res.render('admin/products/listProducts', {
             titulo: "Listado de productos",
-            productos: getProducts
+            productos: products
         })
     },
     /* Envia la vista de formulario de creación de producto */
@@ -18,7 +18,7 @@ module.exports = {
     productCreate: (req, res) => {
         /* 1 - Crear el objeto producto */
         let lastId = 0;
-        getProducts.forEach(product => {
+        products.forEach(product => {
             if(product.id > lastId){
                 lastId = product.id;
             }
@@ -45,11 +45,11 @@ module.exports = {
 
         // Paso 2 - Guardar el nuevo producto en el array de usuarios
 
-        getProducts.push(newProduct)
+        products.push(newProduct)
 
        // Paso 3 - Escribir el JSON de productos con el array actual
 
-       writeProducts(getProducts)
+       writeProducts(products)
 
        // Paso 4 - Devolver respuesta (redirección)
 
@@ -60,7 +60,7 @@ module.exports = {
         /* 1 - Obtener el id del producto */
         let idProducto = +req.params.id;
         /* 2 - Buscar el producto a editar */
-        let producto = getProducts.find(producto => producto.id === idProducto)
+        let producto = products.find(producto => producto.id === idProducto)
         /* 3 - Mostrar el producto en la vista */
         res.render('admin/products/editProduct', {
             titulo: "Edición",
@@ -72,7 +72,7 @@ module.exports = {
         /* 1 - Obtener el id del producto */
         let idProducto = +req.params.id;
         /* 2 - Buscar el producto a editar y modificar el producto */
-        getProducts.forEach(producto => {
+        products.forEach(producto => {
             if(producto.id === idProducto){
                 producto.name = req.body.name
                 producto.price = req.body.price
@@ -85,7 +85,7 @@ module.exports = {
         })
 
         /* 3 - Guardar los cambios */
-        writeProducts(getProducts);
+        writeProducts(products);
 
         /* 4 - Respuesta */
         res.redirect('/admin/productos');
@@ -95,16 +95,16 @@ module.exports = {
         /* 1 - Obtener el id del producto a eliminar */
         let idProducto = +req.params.id;
         /* 2 - Buscar el producto dentro del array y eliminarlo */
-        getProducts.forEach(producto => {
+        products.forEach(producto => {
             if(producto.id === idProducto){
                 //Obtener la ubicación (índice) del producto a eliminar
-                let productToDeleteIndex = getProducts.indexOf(producto);
+                let productToDeleteIndex = products.indexOf(producto);
                 //Elimino el producto del array
-                getProducts.splice(productToDeleteIndex, 1)
+                products.splice(productToDeleteIndex, 1)
             }
         })
         /* 3 - Sobreescribir el json */
-        writeProducts(getProducts);
+        writeProducts(products);
         /* 4 - Enviar respuesta  */
         res.redirect('/admin/productos')
     },

@@ -7,9 +7,9 @@ const PORT = process.env.PORT || 3000;
 const methodOverride = require('method-override');
 
 /* Enrutadores */
-const indexRouter = require('./routes/indexRouter');
-const productsRouter = require('./routes/productsRouter');
-const usersRouter = require('./routes/usersRouter');
+const indexRouter = require('./routes/index');
+const productsRouter = require('./routes/products');
+const usersRouter = require('./routes/users');
 const adminRouter = require('./routes/adminRouter');
 
 app.use(express.static(path.join(__dirname, '../public')));

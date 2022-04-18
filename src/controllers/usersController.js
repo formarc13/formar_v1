@@ -1,4 +1,4 @@
-const {getUsers, writeUsers} = require('../data');
+const {users, writeUsers} = require('../data');
 
 module.exports = {
     login: (req, res) => {
@@ -15,7 +15,7 @@ module.exports = {
        //Registrar un usuario - Guardarlo en el JSON
        // Paso 1 - Crear un objeto User
         let lastId = 0;
-        getUsers.forEach(user => {
+        users.forEach(user => {
             if(user.id > lastId){
                 lastId = user.id
             }
@@ -31,11 +31,11 @@ module.exports = {
 
        // Paso 2 - Guardar el nuevo usuario en el array de usuarios
 
-        getUsers.push(newUser)
+        users.push(newUser)
 
        // Paso 3 - Escribir el JSON de usuarios con el array actual
 
-       writeUsers(getUsers)
+       writeUsers(users)
 
        // Paso 4 - Devolver respuesta (redirección)
 

@@ -1,24 +1,24 @@
 <section class="products__container">
     <h2 class="products__title"> <%= products_title %> </h2>
     <div class="products__container--slider">
-        <% productos.forEach(producto => { %>
+        <% products.forEach(product => { %>
             <article class="products__card">
-                <% if (producto.discount > 0) { %>
-                    <span class="products__card--discount"><%= producto.discount %> %</span>
+                <% if (product.discount > 0) { %>
+                    <span class="products__card--discount"><%= product.discount %> %</span>
                 <% } %>
-                <a href="/productos/detalle/<%= producto.id %> ">
+                <a href="/products/detalle/<%= product.id %> ">
                     <div class="card__image--container">
-                        <img src="images/<%= producto.image %>" alt="">
+                        <img src="images/<%= product.image %>" alt="">
                     </div>
-                    <p class="card__name"><%= producto.name %> </p>
+                    <p class="card__name"><%= product.name %> </p>
                     <div class="card__price">
-                        <% if (producto.discount > 0) { %>
-                            <span class="card__priceSale--original">$ <%= producto.price %> </span>$ <%= producto.price - producto.discount * producto.price / 100 %>
+                        <% if (product.discount > 0) { %>
+                            <span class="card__priceSale--original">$ <%= product.price %> </span>$ <%= product.price - product.discount * product.price / 100 %>
                         <% } else { %>
-                        $ <%= producto.price %> 
+                        $ <%= product.price %> 
                         <% } %>
                     </div>
-                    <p class="card__description"><%= producto.description %></p>
+                    <p class="card__description"><%= product.description %></p>
                 </a>
             </article>
         <% }) %>
