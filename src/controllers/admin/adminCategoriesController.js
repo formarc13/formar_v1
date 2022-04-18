@@ -1,11 +1,11 @@
-const {getCategories, writeCategories} = require('../../data');
+const {categories, writeCategories} = require('../../data');
 
 module.exports = {
     /* Envia la vista de listado de las categorias */
     list: (req, res) => {
       res.render('admin/categories/listCategories', {
           titulo: "Categorías",
-          categorias: getCategories
+          categorias: categories
       })
     },
     /* Envia la vista de formulario de creación de categorias */
@@ -15,7 +15,7 @@ module.exports = {
     /* Recibe los datos del form de creación y guarda el categorias en la DB */
     categoryCreate: (req, res) => {
       let lastId = 0;
-      getCategories.forEach(categoria => {
+      categories.forEach(categoria => {
         if(categoria.id > lastId){
           lastId = categoria.id
         }
@@ -26,9 +26,9 @@ module.exports = {
         id: lastId + 1
       };
 
-      getCategories.push(newCategory);
+      categories.push(newCategory);
 
-      writeCategories(getCategories);
+      writeCategories(categories);
 
       res.redirect('/admin/categorias');
     },
@@ -36,7 +36,7 @@ module.exports = {
     categoryEdit: (req, res) => {
       let categoryId = +req.params.id;
 
-      let categoria = getCategories.find(emprendimiento => emprendimiento.id === categoryId)
+      let categoria = categories.find(emprendimiento => emprendimiento.id === categoryId)
 
       res.render('admin/categories/editCategory', {
         titulo: "Editar categoria",
@@ -47,13 +47,13 @@ module.exports = {
     categoryUpdate: (req, res) => {
       let categoryId = +req.params.id;
       
-      getCategories.forEach(categoria => {
+      categories.forEach(categoria => {
         if(categoria.id === categoryId){
           categoria.name = req.body.name
         }
       });
 
-      writeCategories(getCategories);
+      writeCategories(categories);
 
       res.redirect('/admin/categorias');
     },
@@ -61,14 +61,14 @@ module.exports = {
     categoryDelete: (req, res) => {
         let categoryId = +req.params.id;
 
-        getCategories.forEach(categoria => {
+        categories.forEach(categoria => {
             if(categoria.id === categoryId){
-                let categoryToDeleteIndex = getCategories.indexOf(categoria);
-                getCategories.splice(categoryToDeleteIndex, 1)
+                let categoryToDeleteIndex = categories.indexOf(categoria);
+                categories.splice(categoryToDeleteIndex, 1)
             }
         })
        
-        writeCategories(getCategories);
+        writeCategories(categories);
        
         res.redirect('/admin/categorias')
     },

@@ -1,55 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-    <%- include('partials/head')  %> 
+    <%- include('../partials/head')  %> 
 <body>
-    <%- include('partials/header')  %> 
+    <%- include('../partials/header')  %> 
     
     <main class="products__main container">
-        <h1>products de emprendedorxs</h1>
-        <div class="products__filters--container row" >
+        <h1 class="text-center mb-2">Productos de emprendedorxs</h1>
+        <div class="products__filters--container row p-5" >
             <div class="products__filter--select col-md-6">
-                <label for="category">Filtrá por categoría</label>
-                <select name="category" id="category">
+                <select class="form-select" name="category" id="category">
                     <option value="">Categorías</option>
                 </select>
             </div>
             <div class="products__filter--select col-md-6">
-                <label for="project">Filtrá por categoría</label>
-                <select name="project" id="project">
+                <select class="form-select" name="project" id="project">
                     <option value="">Emprendimiento</option>
                 </select>
             </div>
         </div>
         <div class="row">
             <% products.forEach(product => { %>
-                <article class="products__card col-sm-6 col-md-4 col-lg-3">
-                    <% if (product.discount > 0) { %>
-                        <span class="products__card--discount"><%= product.discount %> %</span>
-                    <% } %>
-                    <a href="/products/detalle/<%= product.id %> ">
-                        <div class="card__image--container">
-                            <img src="images/<%= product.image %>" alt="">
+                <div class="product__card--container col-md-6 col-lg-4">
+                    <article class="products__card ">
+                        <% if (product.discount > 0) { %>
+                            <span class="products__card--discount"><%= product.discount %> %</span>
+                        <% } %>
+                        <a href="/productos/detalle/<%= product.id %>">
+                            <div class="card__image--container">
+                                <img src="images/<%= product.image %>" alt="">
+                            </div>
+                            <p class="card__name"><%= product.name %> </p>
+                            <div class="card__price">
+                                <% if (product.discount > 0) { %>
+                                    <span class="card__priceSale--original">$ <%= product.price %> </span>$ <%= product.price - product.discount * product.price / 100 %>
+                                <% } else { %>
+                                $ <%= product.price %> 
+                                <% } %>
+                            </div>
+                            <p class="card__description"><%= product.description %></p>
+                        </a>
+                        <div class="products__card--buttonsContainer">
+                            <button class="btn btn-outline-secondary">Detalle</button>
+                            <button class="btn btn-outline-primary">Agregar al carrito</button>
                         </div>
-                        <p class="card__name"><%= product.name %> </p>
-                        <div class="card__price">
-                            <% if (product.discount > 0) { %>
-                                <span class="card__priceSale--original">$ <%= product.price %> </span>$ <%= product.price - product.discount * product.price / 100 %>
-                            <% } else { %>
-                            $ <%= product.price %> 
-                            <% } %>
-                        </div>
-                        <p class="card__description"><%= product.description %></p>
-                    </a>
-                    <div class="products__card--buttonsContainer">
-                        <button class="btn btn-outline-secondary">Detalle</button>
-                        <button class="btn btn-outline-primary">Agregar al carrito</button>
-                    </div>
-                </article>
+                    </article>
+                </div>
             <% }) %>
         </div>
     </main>
     
-    <%- include('partials/footer')  %> 
-    <%- include('partials/scripts')  %> 
+    <%- include('../partials/footer')  %> 
+    <%- include('../partials/scripts')  %> 
 </body>
 </html>

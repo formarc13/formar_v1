@@ -3,12 +3,14 @@ const {users, writeUsers} = require('../data');
 module.exports = {
     login: (req, res) => {
         res.render('login', {
-            titulo: "Login"
+            titulo: "Login",
+            css: "userForms.css"
         })
     }, 
     register: (req, res) => {
         res.render('register', {
-            titulo: "Registro"
+            titulo: "Registro",
+            css: "userForms.css"
         })
     }, 
     processRegister: (req, res) => {

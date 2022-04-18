@@ -5,7 +5,8 @@ module.exports = {
         res.render('index', {
            titulo: "Homepage",
            products_title: "Productos",
-           products
+           products,
+           css: "home.css"
         })
     },
     contact: (req, res) => res.send("CONTACTO")
