@@ -14,6 +14,7 @@ module.exports = {
     processRegister: (req, res) => {
        //Registrar un usuario - Guardarlo en el JSON
        // Paso 1 - Crear un objeto User
+
         let lastId = 0;
         users.forEach(user => {
             if(user.id > lastId){
@@ -26,7 +27,7 @@ module.exports = {
             name: req.body.name,
             email: req.body.email,
             password: req.body.password,
-            avatar: "" 
+            avatar: req.file ? req.file.filename : "default-image.png"
         }
 
        // Paso 2 - Guardar el nuevo usuario en el array de usuarios

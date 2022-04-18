@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head') %> 
+<body>
+  <%- include('../partials/header') %> 
+  
+      <main class="container min-vh-100 pt-5">
+        <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th scope="col">id</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Dirección</th>
+                <th scope="col">Categoría</th>
+                <th scope="col">Integrantes</th>
+                <th scope="col">Teléfono</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% emprendimientos.forEach(emprendimiento => { %>
+                <tr>
+                  <th scope="row"><%- emprendimiento.id %></th>
+                  <td><%- emprendimiento.name %></td>
+                  <td><%- emprendimiento.address %></td>
+                  <td><%- emprendimiento.categoryId %></td>
+                  <td>
+                    <% emprendimiento.members.forEach(miembro => { %>
+                      <%- miembro %> 
+                    <% }) %>
+                  </td>
+                  <td><%- emprendimiento.phone %></td>
+                  <td>
+                    <a href="/admin/emprendimientos/editar/<%- emprendimiento.id %> " class="btn btn-success">
+                      <i class="fa-solid fa-pen-to-square"></i>
+                    </a>
+                    <form action="/admin/emprendimientos/eliminar/<%- emprendimiento.id %>?_method=DELETE" method="post">
+                      <button class="btn btn-danger" type="submit">
+                        <i class="fa-solid fa-trash-can"></i>
+                      </button>
+                    </form>
+                  </td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+      </main>
+
+      <%- include('../partials/footer') %> 
+      
+      <%- include('../partials/scripts') %> 
+
+</body>
+</html>

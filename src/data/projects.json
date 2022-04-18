@@ -1,92 +1,81 @@
-[
-    {
-        "id": 1,
-        "name": "Las costureras de Iapi",
-        "address": "Calle falsa 123",
-        "categoryId": 1,
-        "members": ["Jorge", "Ana"],
-        "phone": "151515151515",
-        "description": "Este grupo se conformó por vecinas de IAPI que trabajaban individualmente en tareas de costura. A partir de las reuniones grupales en el Centro Integrador Comunitario se dio forma a este nuevo trabajo colectivo. \nJuntas generan nuevos productos, se capacitan y comparten conocimientos. "
-    },
-    {
-        "id": 2,
-        "name": "Lorensú",
-        "address": "Calle falsa 123",
-        "categoryId": 1,
-        "members": ["Jorge", "Ana"],
-        "phone": "151515151515",
-        "description": "Lorensú es un emprendimiento de costura formado por Susana y Lorena, dos mujeres del barrio IAPI. Se complementan en el cortado y la confección de sus productos. Siempre en movimiento, siempre capacitándose para seguir mejorando sus productos."
-    },
-    {
-        "id": 3,
-        "name": "Marroquineros de puerta 8",
-        "address": "Calle falsa 123",
-        "categoryId": 1,
-        "members": ["Jorge", "Ana"],
-        "phone": "151515151515",
-        "description": "En Puerta Ocho viven muchas personas que se dedican a la costura y la marroquinería. Desarrollan productos individualmente y en conjunto. Luego de muchos años de trabajo en talleres donde aprendieron el oficio, cada uno de ellos logró comprar su propia maquina y ahora realizan su propia producción. Emmanuel y Adriana, Cristian y Martin realizan todo tipo de productos, desde cartucheras, mochilas, morrales, botineros y cualquier otro producto a pedido. "
-    },
-    {
-        "id": 4,
-        "name": "Mis Amigurumis",
-        "address": "Calle falsa 123",
-        "categoryId": 1,
-        "members": ["Jorge", "Ana"],
-        "phone": "151515151515",
-        "description": "Sandra y Zulma son dos hermanas catamarqueñas que viven en el barrio Puerta 8. Su abuela les enseñó a tejer y de a poco empezaron a hacer amigurumis como hobby. ¡Sus simpáticos animalitos son los mejores compañeros de aventuras para los más chicos! 'Hemos aprendido a manejarnos y no regalar nuestro trabajo...eso está buenísimo. Aprendimos a valorarnos. Gracias a Dios está dando buenos frutos.'"
-    },
-    {
-        "id": 5,
-        "name": "Macralí",
-        "address": "Calle falsa 123",
-        "categoryId": 1,
-        "members": ["Jorge", "Ana"],
-        "phone": "151515151515",
-        "description": "Liliana Gini es una mujer muy emprendedora y muy habilidosa con sus manos. Ella forma parte también de Resiliencia Material Didáctico. Lili es fanática del macramé y crea todo tipo de objetos prácticos y decorativos. "
-    },
-    {
-        "id": 6,
-        "name": "Las muñecas de Elma",
-        "address": "Calle falsa 123",
-        "categoryId": 1,
-        "members": ["Jorge", "Ana"],
-        "phone": "151515151515",
-        "description": "Elma aprendió a hacer muñecas de tela en el taller del penal de Ezeiza. Supo que al salir las muñecas la iban a acompañar y sacar adelante. Fue así que al recuperar la libertad empezó a trabajar en su propia versión de muñecas y a nuclear a distintas mujeres que necesitaban un espacio para volver a empezar. El taller en lo de Elma es un lugar de trabajo, de contención, de apoyo y pertenencia. La cooperativa “Volver a Empezar” se compone hoy en día de 16 mujeres y cientos de muñecas. "
-    },
-    {
-        "id": 7,
-        "name": "Resilencia",
-        "address": "Calle falsa 123",
-        "categoryId": 1,
-        "members": ["Jorge", "Ana"],
-        "phone": "151515151515",
-        "description": "Liliana y Marilina son las creadoras de “Resiliencia: material didáctico”. Con sus productos buscan ayudar a que chicos con dificultades motrices y perceptivas puedan aprender y desarrollarse jugando. Liliana es maestra jardinera, su experiencia familiar con terapias y estimulación temprana es una constante inspiración. Mariliana es una maestra de la costura y un motor incansable de este proyecto. Juntas crean variedad de productos completamente hechos en tela; libros sensoriales, tateti, pista de autos, pelotas, cubos sensoriales y muñecos entre otros! 'Siempre estamos buscando innovar. Lo que más me gusta es cuando las mamás ven los libros y se ponen tan contentas, nos agradecen, nos mandan videos! La satisfacción más grande es saber que hacemos algo para un chico con una dificultad. Eso nos pone contentas'"
-    },
-    {
-        "id": 8,
-        "name": "Pituca",
-        "address": "Calle falsa 123",
-        "categoryId": 1,
-        "members": ["Jorge", "Ana"],
-        "phone": "151515151515",
-        "description": "Dulce es una joven vecina del barrio de Iapi, que partiendo de una visión se propuso realizar mantas nórdicas para vender. Luego de mucha búsqueda dio con el material soñado, vellón de pura lana de oveja. Este tipo de tejido se realiza usando exclusivamente las manos. Dulce sueña que su emprendimiento crezca para poder cumplir su mayor sueño, estudiar la Licenciatura en Gestión Ambiental. Las mantas se realizan y cotizan a pedido. Los tamaños y colores pueden variar Pie de Cama twin y queen \n Manta twin y queen \n Manta Bebé \n Chichonera "
-    },
-    {
-        "id": 9,
-        "name": "Recicla y festejá",
-        "address": "Calle falsa 123",
-        "categoryId": 1,
-        "members": ["Jorge", "Ana"],
-        "phone": "151515151515",
-        "description": "Elena es una aficionada de la pastelería y todo lo que se relacione con decorar mesas y eventos.​ Junto con el apoyo de su marido, Elena se animó a incursionar en el reciclado de botellas para crear vasos, fanales y botellas. De esta manera brinda un servicio integral de productos para eventos. 'A mi me interesó mucho la salida laboral que esto significaba, y al final Fundación Formar fue como la llegada de un ángel porque a partir de esto me han salido muchos eventos, caterings, mesas dulces y más.'"
-    },
-    {
-        "id": 10,
-        "name": "Viapi Catering",
-        "address": "Calle falsa 123",
-        "categoryId": 1,
-        "members": ["Jorge", "Ana"],
-        "phone": "151515151515",
-        "description": "VIAPI es un emprendimiento gastronómico que surge de la iniciativa de siete participantes de un curso de cocina saludable brindado por la Chef Felicitas Pizarro. Con sus viandas y caterings, Leticia, Miriam, Vanesa, Melina, Jimena, Lorena y Virginia buscan ofrecer productos de calidad, hechos con dedicación y compromiso. Consultá por la oferta de menú."
-    }
-]
+[{
+    "id": 1,
+    "name": "Las costureras de Iapi",
+    "address": "Calle falsa 123",
+    "categoryId": 1,
+    "members": ["Jorge", "Ana"],
+    "phone": "151515151515",
+    "description": "Este grupo se conformó por vecinas de IAPI que trabajaban individualmente en tareas de costura. A partir de las reuniones grupales en el Centro Integrador Comunitario se dio forma a este nuevo trabajo colectivo. \nJuntas generan nuevos productos, se capacitan y comparten conocimientos. "
+}, {
+    "id": 2,
+    "name": "Lorensú",
+    "address": "Calle falsa 123",
+    "categoryId": 1,
+    "members": ["Jorge", "Ana"],
+    "phone": "151515151515",
+    "description": "Lorensú es un emprendimiento de costura formado por Susana y Lorena, dos mujeres del barrio IAPI. Se complementan en el cortado y la confección de sus productos. Siempre en movimiento, siempre capacitándose para seguir mejorando sus productos."
+}, {
+    "id": 3,
+    "name": "Marroquineros de puerta 8",
+    "address": "Calle falsa 123",
+    "categoryId": 1,
+    "members": ["Jorge", "Ana"],
+    "phone": "151515151515",
+    "description": "En Puerta Ocho viven muchas personas que se dedican a la costura y la marroquinería. Desarrollan productos individualmente y en conjunto. Luego de muchos años de trabajo en talleres donde aprendieron el oficio, cada uno de ellos logró comprar su propia maquina y ahora realizan su propia producción. Emmanuel y Adriana, Cristian y Martin realizan todo tipo de productos, desde cartucheras, mochilas, morrales, botineros y cualquier otro producto a pedido. "
+}, {
+    "id": 4,
+    "name": "Mis Amigurumis",
+    "address": "Calle falsa 123",
+    "categoryId": 1,
+    "members": ["Jorge", "Ana"],
+    "phone": "151515151515",
+    "description": "Sandra y Zulma son dos hermanas catamarqueñas que viven en el barrio Puerta 8. Su abuela les enseñó a tejer y de a poco empezaron a hacer amigurumis como hobby. ¡Sus simpáticos animalitos son los mejores compañeros de aventuras para los más chicos! 'Hemos aprendido a manejarnos y no regalar nuestro trabajo...eso está buenísimo. Aprendimos a valorarnos. Gracias a Dios está dando buenos frutos.'"
+}, {
+    "id": 5,
+    "name": "Macralí",
+    "address": "Calle falsa 123",
+    "categoryId": 1,
+    "members": ["Jorge", "Ana"],
+    "phone": "151515151515",
+    "description": "Liliana Gini es una mujer muy emprendedora y muy habilidosa con sus manos. Ella forma parte también de Resiliencia Material Didáctico. Lili es fanática del macramé y crea todo tipo de objetos prácticos y decorativos. "
+}, {
+    "id": 6,
+    "name": "Las muñecas de Elma",
+    "address": "Calle falsa 123",
+    "categoryId": 1,
+    "members": ["Jorge", "Ana"],
+    "phone": "151515151515",
+    "description": "Elma aprendió a hacer muñecas de tela en el taller del penal de Ezeiza. Supo que al salir las muñecas la iban a acompañar y sacar adelante. Fue así que al recuperar la libertad empezó a trabajar en su propia versión de muñecas y a nuclear a distintas mujeres que necesitaban un espacio para volver a empezar. El taller en lo de Elma es un lugar de trabajo, de contención, de apoyo y pertenencia. La cooperativa “Volver a Empezar” se compone hoy en día de 16 mujeres y cientos de muñecas. "
+}, {
+    "id": 7,
+    "name": "Resilencia",
+    "address": "Calle falsa 123",
+    "categoryId": 1,
+    "members": ["Jorge", "Ana"],
+    "phone": "151515151515",
+    "description": "Liliana y Marilina son las creadoras de “Resiliencia: material didáctico”. Con sus productos buscan ayudar a que chicos con dificultades motrices y perceptivas puedan aprender y desarrollarse jugando. Liliana es maestra jardinera, su experiencia familiar con terapias y estimulación temprana es una constante inspiración. Mariliana es una maestra de la costura y un motor incansable de este proyecto. Juntas crean variedad de productos completamente hechos en tela; libros sensoriales, tateti, pista de autos, pelotas, cubos sensoriales y muñecos entre otros! 'Siempre estamos buscando innovar. Lo que más me gusta es cuando las mamás ven los libros y se ponen tan contentas, nos agradecen, nos mandan videos! La satisfacción más grande es saber que hacemos algo para un chico con una dificultad. Eso nos pone contentas'"
+}, {
+    "id": 8,
+    "name": "Pituca",
+    "address": "Calle falsa 123",
+    "categoryId": 1,
+    "members": ["Jorge", "Ana"],
+    "phone": "151515151515",
+    "description": "Dulce es una joven vecina del barrio de Iapi, que partiendo de una visión se propuso realizar mantas nórdicas para vender. Luego de mucha búsqueda dio con el material soñado, vellón de pura lana de oveja. Este tipo de tejido se realiza usando exclusivamente las manos. Dulce sueña que su emprendimiento crezca para poder cumplir su mayor sueño, estudiar la Licenciatura en Gestión Ambiental. Las mantas se realizan y cotizan a pedido. Los tamaños y colores pueden variar Pie de Cama twin y queen \n Manta twin y queen \n Manta Bebé \n Chichonera "
+}, {
+    "name": "Recicla y festejá",
+    "address": "Calle falsa 123",
+    "phone": "151515151515",
+    "categoryId": "3",
+    "description": "Elena es una aficionada de la pastelería y todo lo que se relacione con decorar mesas y eventos.​ Junto con el apoyo de su marido, Elena se animó a incursionar en el reciclado de botellas para crear vasos, fanales y botellas. De esta manera brinda un servicio integral de productos para eventos. 'A mi me interesó mucho la salida laboral que esto significaba, y al final Fundación Formar fue como la llegada de un ángel porque a partir de esto me han salido muchos eventos, caterings, mesas dulces y más.'",
+    "id": 9,
+    "members": []
+}, {
+    "name": "Viapi Catering",
+    "address": "Calle falsa 1234",
+    "phone": "1515151515151",
+    "categoryId": "Categoría",
+    "description": "VIAPI es un emprendimiento gastronómico que surge de la iniciativa de siete participantes de un curso de cocina saludable brindado por la Chef Felicitas Pizarro. Con sus viandas y caterings, Leticia, Miriam, Vanesa, Melina, Jimena, Lorena y Virginia buscan ofrecer productos de calidad, hechos con dedicación y compromiso. Consultá por la oferta de menú.",
+    "id": 10,
+    "members": []
+}]
