@@ -17,7 +17,7 @@ router.get('/productos', adminProductsController.list);
 /* GET - Agregar producto */
 router.get('/productos/agregar', adminProductsController.productAdd);
 /* POST - Crea un producto en la DB */
-router.post('/productos', uploadFile.array('image'),adminProductsController.productCreate);
+router.post('/productos', uploadFile.single('image'), adminProductsController.productCreate);
 /* GET - Editar producto */
 router.get('/productos/editar/:id', adminProductsController.productEdit);
 /* PUT - Actualiza producto en la DB */
