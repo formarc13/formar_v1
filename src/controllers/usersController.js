@@ -8,6 +8,19 @@ module.exports = {
             css: "userForms.css"
         })
     }, 
+    processLogin: (req, res) => {
+        let errors = validationResult(req);
+        if(errors.isEmpty()){
+            //Levantar sesión
+            res.redirect('/');
+        }else{
+            res.render('users/login', {
+                titulo: "Login",
+                css: "userForms.css",
+                errors: errors.mapped()
+            })
+        }
+    },
     register: (req, res) => {
         res.render('users/register', {
             titulo: "Registro",

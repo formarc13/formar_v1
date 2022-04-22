@@ -1,4 +1,5 @@
 const { check, body } = require('express-validator');
+const {users} = require('../data');
 
 let validateRegister = [
     check("name")
@@ -7,6 +8,13 @@ let validateRegister = [
     check("email")
         .notEmpty().withMessage("El email es requerido").bail()
         .isEmail().withMessage("Ingrese un email válido"),
+    body("email").custom((value)=>{
+        let user = users.find(user => user.email === value);
+        if(user){
+            return false;
+        }
+        return true;
+    }).withMessage("Email ya registrado"),
     check("password")
         .notEmpty().withMessage("Ingrese una contraseña")
         .isLength({min: 8}).withMessage("La contraseña debe tener por lo menos 8 caracteres"), 

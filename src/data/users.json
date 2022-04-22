@@ -1,1 +1,25 @@
-[{"id":0,"name":"","email":"","password":"","avatar":""},{"id":1,"name":"Jonatan Céspedes","email":"user@mail.com","password":"123456","avatar":""},{"id":2,"name":"Jhan Diaz","email":"jhan@mail.com","password":"123","avatar":""},{"id":3,"name":"Jona","email":"mail@mail.com","password":"123","avatar":""},{"id":4,"name":"Jona","email":"mail@mail.com","password":"123","avatar":""},{"id":5,"name":"","email":"mail@mail.com","password":"Q37kBqNxfta4zuP","avatar":"default-image.png"},{"id":6,"name":"","email":"mail@mail.com","password":"Q37kBqNxfta4zuP","avatar":"default-image.png"},{"id":7,"name":"Jonatan","email":"mail@mail.com","password":"Q37kBqNxfta4zuP","avatar":"default-image.png"},{"id":8,"name":"Jonatan","email":"mail@mail.com","password":"123","avatar":"default-image.png"},{"id":9,"name":"Jonatan","email":"mail@mail.com","password":"12345678","avatar":"default-image.png"}]
+[{
+    "id": 0,
+    "name": "",
+    "email": "",
+    "password": "",
+    "avatar": ""
+}, {
+    "id": 1,
+    "name": "Jonatan Céspedes",
+    "email": "user@mail.com",
+    "password": "123456",
+    "avatar": ""
+}, {
+    "id": 2,
+    "name": "Jhan Diaz",
+    "email": "jhan@mail.com",
+    "password": "123",
+    "avatar": ""
+}, {
+    "id": 3,
+    "name": "Jona",
+    "email": "mail@mail.com",
+    "password": "123",
+    "avatar": ""
+}]

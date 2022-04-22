@@ -5,7 +5,7 @@
     <%- include('../partials/header')  %> 
 
     <main class="forms__mainContainer">
-        <form action="" method="">
+        <form action="/usuarios/login" method="POST">
             <div class="forms__logo">
                     <img src="/images/formar_logo2.jpg" alt="logo formar">
             </div>
@@ -13,12 +13,16 @@
             <div class="form--group">
                 <label for="email">Email</label>
                 <input type="email" name="email" id="email">
-                <small class="text-danger">Campo requerido</small>
+                <% if (locals.errors && errors.email) { %>
+                    <small class="text-danger"><%= errors.email.msg %></small>
+                <% } %>
             </div>
             <div class="form--group">
                 <label for="password">Contraseña</label>
                 <input type="password" name="password" id="password" >
-                <small class="text-danger">Campo requerido</small>
+                <% if (locals.errors && errors.password) { %>
+                    <small class="text-danger"><%= errors.password.msg %></small>
+                <% } %>
             </div>
             <div class="form-check mb-3">
                 <input class="form-check-input" name="remember" type="checkbox" value="" id="remember">
@@ -26,8 +30,11 @@
                     Recordarme
                 </label>
             </div>
+            <% if (locals.errors && errors.custom) { %>
+                <small class="text-danger"><%= errors.custom.msg %></small>
+            <% } %>
             <div class="form__buttons--container--login">
-                <button class="btn btn-outline-primary" type="reset">Ingresar</button>
+                <button class="btn btn-outline-primary" type="submit">Ingresar</button>
             </div>
         </form>
     </main>
