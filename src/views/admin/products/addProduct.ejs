@@ -10,33 +10,48 @@
           <form class="row " action="/admin/productos" method="POST" enctype="multipart/form-data">
             <div class="mb-3 col-md-6">
               <label for="name" class="form-label">Nombre del producto</label>
-              <input type="text" name="name" class="form-control" id="name" placeholder="Ej: Pantuflas">
+              <input type="text" name="name" class="form-control" id="name" placeholder="Ej: Pantuflas" value="<%= (locals.old && old.name) ? old.name : "" %>">
+              <% if (locals.errors && errors.name) { %>
+               <small class="text-danger"><%= errors.name.msg%></small>
+              <% } %>
             </div>
             <div class="mb-3 col-md-6">
               <label for="price" class="form-label">Precio</label>
               <input type="number" name="price" class="form-control" id="price" placeholder="Ej: 1500">
+              <% if (locals.errors && errors.price) { %>
+                <small class="text-danger"><%= errors.price.msg%></small>
+               <% } %>
             </div>
             <div class="mb-3 col-md-6">
               <label for="discount" class="form-label">Descuento</label>
               <input type="number" name="discount" class="form-control" id="discount" placeholder="Ej: 1500">
+              <% if (locals.errors && errors.discount) { %>
+                <small class="text-danger"><%= errors.discount.msg%></small>
+              <% } %>
             </div>
             <div class="mb-3 col-md-6">
               <label for="category" class="form-label">Categorias</label>
               <select name="categoryId" class="form-select" id="category" aria-label="Default select example">
-                <option selected hidden>Categoría</option>
+                <option selected hidden value="">Categoría</option>
                 <option value="1">Textil - Indumentaria</option>
                 <option value="2">Alimentos y bebidas</option>
                 <option value="3">Artesanías</option>
               </select>
+              <% if (locals.errors && errors.categoryId) { %>
+                <small class="text-danger"><%= errors.categoryId.msg%></small>
+              <% } %>
             </div>
             <div class="mb-3 col-md-6">
               <label for="project" id="project" class="form-label">Projectos</label>
               <select name="projectId" class="form-select" aria-label="Default select example">
-                <option selected hidden>Projecto</option>
+                <option selected hidden value="">Projecto</option>
                 <option value="1">Emprendimiento 1</option>
                 <option value="2">Emprendimiento 2</option>
                 <option value="3">Emprendimiento 3</option>
               </select>
+              <% if (locals.errors && errors.projectId) { %>
+                <small class="text-danger"><%= errors.projectId.msg%></small>
+              <% } %>
             </div>
             <div class="mb-3 col-md-6">
               <label for="inputFile" class="form-label">Imagen</label>

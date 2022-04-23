@@ -1,4 +1,5 @@
 const { products, writeProducts } = require('../../data');
+const { validationResult } = require('express-validator');
 
 module.exports = {
     /* Envia la vista de listado de productos */
@@ -16,32 +17,42 @@ module.exports = {
     },
     /* Recibe los datos del form de creación y guarda el producto en la DB */
     productCreate: (req, res) => {
-        /* 1 - Crear el objeto producto */
-        let lastId = 0;
-        products.forEach(product => {
-            if(product.id > lastId){
-                lastId = product.id;
+        let errors = validationResult(req);
+       
+        if(errors.isEmpty()){
+            /* 1 - Crear el objeto producto */
+            let lastId = 0;
+            products.forEach(product => {
+                if(product.id > lastId){
+                    lastId = product.id;
+                }
+            });
+
+            let newProduct = {
+                ...req.body, 
+                id: lastId + 1,
+                image: req.file ? req.file.filename : "default-image.png",
+                stock: req.body.stock ? true : false
             }
-        });
+            
+            // Paso 2 - Guardar el nuevo producto en el array de usuarios
 
-        let newProduct = {
-            ...req.body, 
-            id: lastId + 1,
-            image: req.file ? req.file.filename : "default-image.png",
-            stock: req.body.stock ? true : false
+            products.push(newProduct)
+
+            // Paso 3 - Escribir el JSON de productos con el array actual
+
+            writeProducts(products)
+
+            // Paso 4 - Devolver respuesta (redirección)
+
+            res.redirect('/admin/productos')
+        }else{
+            res.render('admin/products/addProduct', {
+                titulo: "Agregar producto",
+                errors: errors.mapped(),
+                old: req.body
+            })
         }
-        
-        // Paso 2 - Guardar el nuevo producto en el array de usuarios
-
-        products.push(newProduct)
-
-       // Paso 3 - Escribir el JSON de productos con el array actual
-
-       writeProducts(products)
-
-       // Paso 4 - Devolver respuesta (redirección)
-
-       res.redirect('/admin/productos')
     },
     /* Envia la vista de form de edición de producto */
     productEdit: (req, res) => {

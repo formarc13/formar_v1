@@ -5,6 +5,8 @@ const adminProductsController = require('../controllers/admin/adminProductsContr
 const adminProjectsController = require('../controllers/admin/adminProjectsController');
 const adminCategoriesController = require('../controllers/admin/adminCategoriesController');
 const uploadFile = require('../middlewares/uploadProductImage');
+const productCreateValidator = require('../validations/productCreateValidator');
+
 
 /* GET - Index */
 router.get('/', adminController.index);
@@ -17,7 +19,7 @@ router.get('/productos', adminProductsController.list);
 /* GET - Agregar producto */
 router.get('/productos/agregar', adminProductsController.productAdd);
 /* POST - Crea un producto en la DB */
-router.post('/productos', uploadFile.single('image'), adminProductsController.productCreate);
+router.post('/productos', uploadFile.single('image'), productCreateValidator, adminProductsController.productCreate);
 /* GET - Editar producto */
 router.get('/productos/editar/:id', adminProductsController.productEdit);
 /* PUT - Actualiza producto en la DB */
