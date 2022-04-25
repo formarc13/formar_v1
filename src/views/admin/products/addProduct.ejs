@@ -17,14 +17,14 @@
             </div>
             <div class="mb-3 col-md-6">
               <label for="price" class="form-label">Precio</label>
-              <input type="number" name="price" class="form-control" id="price" placeholder="Ej: 1500">
+              <input type="number" name="price" class="form-control" id="price" placeholder="Ej: 1500" value="<%= (locals.old && old.price) ? old.price : "" %>">
               <% if (locals.errors && errors.price) { %>
                 <small class="text-danger"><%= errors.price.msg%></small>
                <% } %>
             </div>
             <div class="mb-3 col-md-6">
               <label for="discount" class="form-label">Descuento</label>
-              <input type="number" name="discount" class="form-control" id="discount" placeholder="Ej: 1500">
+              <input type="number" name="discount" class="form-control" id="discount" placeholder="Ej: 1500" value="<%= (locals.old && old.discount) ? old.discount : "" %>">
               <% if (locals.errors && errors.discount) { %>
                 <small class="text-danger"><%= errors.discount.msg%></small>
               <% } %>
@@ -33,9 +33,9 @@
               <label for="category" class="form-label">Categorias</label>
               <select name="categoryId" class="form-select" id="category" aria-label="Default select example">
                 <option selected hidden value="">Categoría</option>
-                <option value="1">Textil - Indumentaria</option>
-                <option value="2">Alimentos y bebidas</option>
-                <option value="3">Artesanías</option>
+                <option value="1" <%= (locals.old && old.categoryId) && old.categoryId === "1" ? "selected" : "" %>>Textil - Indumentaria</option>
+                <option value="2" <%= (locals.old && old.categoryId) && old.categoryId === "2" ? "selected" : "" %>>Alimentos y bebidas</option>
+                <option value="3" <%= (locals.old && old.categoryId) && old.categoryId === "3" ? "selected" : "" %>>Artesanías</option>
               </select>
               <% if (locals.errors && errors.categoryId) { %>
                 <small class="text-danger"><%= errors.categoryId.msg%></small>
@@ -45,9 +45,9 @@
               <label for="project" id="project" class="form-label">Projectos</label>
               <select name="projectId" class="form-select" aria-label="Default select example">
                 <option selected hidden value="">Projecto</option>
-                <option value="1">Emprendimiento 1</option>
-                <option value="2">Emprendimiento 2</option>
-                <option value="3">Emprendimiento 3</option>
+                <option value="1"  <%= (locals.old && old.projectId) && old.projectId === "1" ? "selected" : "" %>>Emprendimiento 1</option>
+                <option value="2"  <%= (locals.old && old.projectId) && old.projectId === "2" ? "selected" : "" %>>Emprendimiento 2</option>
+                <option value="3"  <%= (locals.old && old.projectId) && old.projectId === "3" ? "selected" : "" %>>Emprendimiento 3</option>
               </select>
               <% if (locals.errors && errors.projectId) { %>
                 <small class="text-danger"><%= errors.projectId.msg%></small>
@@ -58,12 +58,12 @@
               <input type="file" multiple class="form-control" id="inputFile" name="image"/>
             </div>
             <div class="form-check mb-3 form-switch">
-              <input class="form-check-input" name="stock" type="checkbox" role="switch" id="stock">
+              <input class="form-check-input" name="stock" type="checkbox" role="switch" id="stock" <%= (locals.old && old.stock) ? "checked" : "" %>>
               <label class="form-check-label" for="stock">Stock disponible</label>
             </div>
             <div class="mb-3 ">
               <label for="description" class="form-label">Descripción</label>
-              <textarea name="description" class="form-control" id="description" rows="3"></textarea>
+              <textarea name="description" class="form-control" id="description" rows="3"><%= (locals.old && old.description) ? old.description : "" %></textarea>
             </div>
             <div class="col-12">
               <button class="btn btn-primary" type="submit">Crear</button>
