@@ -5,6 +5,7 @@ const process = require('process');
 require('dotenv').config();
 const PORT = process.env.PORT || 3000;
 const methodOverride = require('method-override');
+const session = require('express-session');
 
 /* Enrutadores */
 const indexRouter = require('./routes/index');
@@ -12,10 +13,20 @@ const productsRouter = require('./routes/products');
 const usersRouter = require('./routes/users');
 const adminRouter = require('./routes/adminRouter');
 
+/* Middlewares de aplicación */
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(methodOverride('_method'));
+/* session */
+app.set('trust proxy', 1)
+app.use(session({
+    secret:"formar",
+    resave: false,
+    saveUninitialized: true,
+    cookie: {}
+}))
+
 
 /* Views config */
 app.set('view engine', 'ejs')

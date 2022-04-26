@@ -6,10 +6,11 @@ const adminProjectsController = require('../controllers/admin/adminProjectsContr
 const adminCategoriesController = require('../controllers/admin/adminCategoriesController');
 const uploadFile = require('../middlewares/uploadProductImage');
 const productCreateValidator = require('../validations/productCreateValidator');
-
+const userSessionCheck = require('../middlewares/userSessionCheck');
+const adminCheck = require('../middlewares/adminCheck');
 
 /* GET - Index */
-router.get('/', adminController.index);
+router.get('/', userSessionCheck, adminCheck, adminController.index);
 
 /* ============== */
 /* CRUD PRODUCTOS */

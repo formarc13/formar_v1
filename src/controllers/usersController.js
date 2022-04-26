@@ -5,27 +5,41 @@ module.exports = {
     login: (req, res) => {
         res.render('users/login', {
             titulo: "Login",
-            css: "userForms.css"
+            css: "userForms.css",
+            session: req.session
         })
     }, 
     processLogin: (req, res) => {
         let errors = validationResult(req);
         if(errors.isEmpty()){
             //Levantar sesión
-            res.redirect('/');
+            let user = users.find(user => user.email === req.body.email);
+
+            req.session.user = {
+                id: user.id,
+                name: user.name,
+                avatar: user.avatar,
+                email: user.email
+            }
+
+            res.locals.user = req.session.user
+
+            res.redirect('/')
         }else{
             res.render('users/login', {
                 titulo: "Login",
                 css: "userForms.css",
-                errors: errors.mapped()
+                errors: errors.mapped(),
+                session: req.session
             })
         }
     },
     register: (req, res) => {
         res.render('users/register', {
             titulo: "Registro",
-            css: "userForms.css"
-        })
+            css: "userForms.css",
+            session: req.session
+        }) 
     }, 
     processRegister: (req, res) => {
         //Verificar si hubo errores en el form
@@ -50,7 +64,8 @@ module.exports = {
                 name: req.body.name,
                 email: req.body.email,
                 password: req.body.password,
-                avatar: req.file ? req.file.filename : "default-image.png"
+                avatar: req.file ? req.file.filename : "default-image.png",
+                rol: "USER"
             }
 
             // Paso 2 - Guardar el nuevo usuario en el array de usuarios
@@ -70,7 +85,8 @@ module.exports = {
             res.render('users/register', {
                 titulo: "Registro",
                 css: "userForms.css",
-                errors: errors.mapped()
+                errors: errors.mapped(),
+                session: req.session
             })
         }
     }

@@ -14,7 +14,9 @@
             <i class="fa-solid fa-xmark"></i>
         </div>
         <div class="header_avatar">
-            <div class="avatar_session"></div>
+            <% if (typeof session.user != "undefined") { %>
+                <div class="avatar_session"></div>
+            <% } %> 
         </div>
         <div class="header_searchBar">
             <form action="">
