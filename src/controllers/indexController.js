@@ -2,7 +2,7 @@ const { products } = require('../data')
 
 module.exports = {
     index: (req, res) => {
-        console.log(req.session)
+        
         res.render('index', {
            titulo: "Homepage",
            products_title: "Productos",

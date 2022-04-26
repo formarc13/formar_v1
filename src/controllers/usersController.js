@@ -3,6 +3,7 @@ const { validationResult } = require('express-validator');
 
 module.exports = {
     login: (req, res) => {
+
         res.render('users/login', {
             titulo: "Login",
             css: "userForms.css",
@@ -19,13 +20,15 @@ module.exports = {
                 id: user.id,
                 name: user.name,
                 avatar: user.avatar,
-                email: user.email
+                email: user.email,
+                rol: user.rol
             }
 
             res.locals.user = req.session.user
 
             res.redirect('/')
         }else{
+            
             res.render('users/login', {
                 titulo: "Login",
                 css: "userForms.css",
@@ -35,6 +38,7 @@ module.exports = {
         }
     },
     register: (req, res) => {
+
         res.render('users/register', {
             titulo: "Registro",
             css: "userForms.css",
@@ -89,5 +93,10 @@ module.exports = {
                 session: req.session
             })
         }
+    },
+    logout: (req, res) => {
+        req.session.destroy();
+
+        res.redirect('/')
     }
 }

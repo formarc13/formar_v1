@@ -30,7 +30,15 @@
             <li><a href="">Conocenos</a></li>
             <li><a href="">Emprendimientos</a></li>
             <li><a href="">Contacto</a></li>
-            <li><a href="/usuarios/login">Ingresá</a></li>
+            <% if (typeof session.user != "undefined") { %>
+                <li><a href="/usuarios/perfil">Mi perfil</a></li>
+                <li><a href="/usuarios/logout">Cerrar sesión</a></li>
+                <% if (session.user.rol === "ADMIN") { %>
+                    <li><a href="/admin">Admin</a></li>
+                <% } %>
+            <% }else{ %> 
+                <li><a href="/usuarios/login">Ingresá</a></li>
+            <% } %> 
         </ul>
     </nav>
 </header>
