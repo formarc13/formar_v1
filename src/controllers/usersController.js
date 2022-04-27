@@ -24,6 +24,15 @@ module.exports = {
                 rol: user.rol
             }
 
+            if(req.body.remember){
+                const TIME_IN_MILISECONDS = 60000;
+                res.cookie('formarCookie', req.session.user, {
+                    expires: new Date(Date.now() + TIME_IN_MILISECONDS),
+                    httpOnly: true,
+                    secure: true
+                })
+            }
+
             res.locals.user = req.session.user
 
             res.redirect('/')
@@ -96,6 +105,10 @@ module.exports = {
     },
     logout: (req, res) => {
         req.session.destroy();
+
+        if(req.cookies.formarCookie){
+            res.cookie('formarCookie', "", { maxAge: -1 })
+        }
 
         res.redirect('/')
     }

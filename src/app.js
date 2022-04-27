@@ -6,6 +6,8 @@ require('dotenv').config();
 const PORT = process.env.PORT || 3000;
 const methodOverride = require('method-override');
 const session = require('express-session');
+const cookieParser = require('cookie-parser');
+const cookieSession = require('./middlewares/cookieSession');
 
 /* Enrutadores */
 const indexRouter = require('./routes/index');
@@ -19,14 +21,15 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(methodOverride('_method'));
 /* session */
-app.set('trust proxy', 1)
+app.set('trust proxy', 1);
 app.use(session({
     secret:"formar",
     resave: false,
     saveUninitialized: true,
     cookie: {}
-}))
-
+}));
+app.use(cookieParser());
+app.use(cookieSession)
 
 /* Views config */
 app.set('view engine', 'ejs')

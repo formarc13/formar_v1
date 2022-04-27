@@ -16,6 +16,7 @@
         <div class="header_avatar">
             <% if (typeof session.user != "undefined") { %>
                 <div class="avatar_session"></div>
+                <img src="images/avatar/<%= session.user.avatar %> " alt="">
             <% } %> 
         </div>
         <div class="header_searchBar">
