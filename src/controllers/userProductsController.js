@@ -5,16 +5,18 @@ module.exports = {
         res.render("products/products", {
             products,
             titulo:"Productos",
-            css: "products.css"
+            css: "products.css",
+            session: req.session
         })
     },
     detail: (req, res) => {
      let productId = +req.params.id;
-     let product = products.find(product => product.id === productId);
+     let producto = products.find(product => product.id === productId);
      res.render("products/productDetail", {
          css: "productDetail.css",
          titulo:"Detalle de producto",
-         product
+         producto,
+         session: req.session
      })
     },
 };

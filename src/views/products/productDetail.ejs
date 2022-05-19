@@ -6,27 +6,20 @@
 
     <main class="productDetail__main container">
       <section class="productDetail__product row">
-        <div class="productDetail__images--container col-md-6">
+        <div class="productDetail__images--container col-md-8">
           <!-- Full-width images with number text -->
           <div class="mySlides">
-            <div class="numbertext">1 / 6</div>
-            <img src="/images/products/<%= product.image %>" style="width: 100%" />
+            <img src="/images/products/<%= producto.image %>"/>
           </div>
           <!-- Next and previous buttons -->
           <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
           <a class="next" onclick="plusSlides(1)">&#10095;</a>
-
-          <!-- Image text -->
-          <div class="caption-container">
-            <p id="caption"></p>
-          </div>
-
           <!-- Thumbnail images -->
           <div class="productDetail__images--row">
             <div class="column">
               <img
                 class="demo cursor"
-                src="/images/products/<%= product.image %>"
+                src="/images/products/<%= producto.image %>"
                 style="width: 100%"
                 onclick="currentSlide(1)"
                 alt="The Woods"
@@ -34,7 +27,22 @@
             </div>
           </div>
         </div>
-        <div class="productDetail__info--container"></div>
+        <div class="col-md-4">
+          <div class="productDetail__info--container">
+            <h2 class="productDetail__name"><%= producto.name %> </h2>
+            <div class="productDetail__price">$ XXXXXX</div>
+            <% if (producto.discount > 0) { %>
+              <div class="productDetail__price--withDiscount">$ XXXXXX</div>
+              <div class="productDetail__discount">XXXXXX %</div>
+            <% } %>
+            <div class="productDetail__counter--container">
+              <button class="productDetail__counter--button">-</button>
+              <span class="productDetail__counter--value">1</span>
+              <button class="productDetail__counter--button">+</button>
+            </div>
+          </div>
+         
+        </div>
       </section>
     </main>
     <script src="/js/productDetail.js"></script>
