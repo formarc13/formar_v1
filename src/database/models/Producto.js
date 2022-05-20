@@ -1,5 +1,5 @@
 module.exports = (sequelize, dataTypes) => {
-    let alias = "Producto";
+    let alias = "Product";
     let cols = {
         id: {
             type: dataTypes.INTEGER(11),
@@ -14,11 +14,11 @@ module.exports = (sequelize, dataTypes) => {
         discount: {
             type: dataTypes.INTEGER(11),
         },
-        categoryId: {
+        category_id: {
             type: dataTypes.INTEGER(11),
             allowNull: false,
         },
-        projectId: {
+        project_id: {
             type: dataTypes.INTEGER(11),
             allowNull: false,
         },
@@ -39,12 +39,12 @@ module.exports = (sequelize, dataTypes) => {
         },
     }
     let config = {
-        tableName: "productos",
+        tableName: "products",
         timestamps: false,
     }
 
-    const Producto = sequelize.define(alias, cols, config);
+    const Product = sequelize.define(alias, cols, config);
 
 
-    return Producto;
+    return Product;
 }
