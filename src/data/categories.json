@@ -1,1 +1,16 @@
-[{"id":1,"name":"Textil - Indumentaria"},{"id":2,"name":"Alimentos y bebidas"},{"id":3,"name":"Artesanías"},{"name":"Juguetería","id":4},{"name":"Prueba","id":5}]
+[{
+    "id": 1,
+    "name": "Textil - Indumentaria"
+}, {
+    "id": 2,
+    "name": "Alimentos y bebidas"
+}, {
+    "id": 3,
+    "name": "Artesanías"
+}, {
+    "name": "Juguetería",
+    "id": 4
+}, {
+    "name": "Prueba",
+    "id": 5
+}]
