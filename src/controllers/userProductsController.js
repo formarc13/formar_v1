@@ -1,13 +1,18 @@
 const { products } = require('../data');
+const db = require('../database/models');
 
 module.exports = {
     list: (req, res) => {
-        res.render("products/products", {
+        db.Producto.findAll()
+            .then((productos) => {
+                res.send(productos)
+            })
+        /* res.render("products/products", {
             products,
             titulo:"Productos",
             css: "products.css",
             session: req.session
-        })
+        }) */
     },
     detail: (req, res) => {
      let productId = +req.params.id;
