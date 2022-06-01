@@ -1,12 +1,17 @@
-const {categories, writeCategories} = require('../../data');
+//const {categories, writeCategories} = require('../../data');
+const db = require("../../database/models");
 
 module.exports = {
     /* Envia la vista de listado de las categorias */
     list: (req, res) => {
-      res.render('admin/categories/listCategories', {
-          titulo: "Categorías",
-          categorias: categories
+      db.Category.findAll()
+      .then((categorias) => {
+        res.render('admin/categories/listCategories', {
+            titulo: "Categorías",
+            categorias
+        })
       })
+      .catch((error) => res.send(error))
     },
     /* Envia la vista de formulario de creación de categorias */
     categoryAdd: (req, res) => {
@@ -14,23 +19,11 @@ module.exports = {
     },
     /* Recibe los datos del form de creación y guarda el categorias en la DB */
     categoryCreate: (req, res) => {
-      let lastId = 0;
-      categories.forEach(categoria => {
-        if(categoria.id > lastId){
-          lastId = categoria.id
-        }
-      });
-      
-      let newCategory = {
-        name: req.body.name,
-        id: lastId + 1
-      };
-
-      categories.push(newCategory);
-
-      writeCategories(categories);
-
-      res.redirect('/admin/categorias');
+      db.Category.create({
+        name: req.body.name
+      }).then((result) => {
+        res.redirect("/admin/categorias")
+      })
     },
     /* Envia la vista de form de edición de categorias */
     categoryEdit: (req, res) => {
