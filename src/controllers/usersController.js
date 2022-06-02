@@ -63,8 +63,16 @@ module.exports = {
         //Si no hay errores, crea el usuario
         if(errors.isEmpty()){
             db.User.create({
-                
+                name: req.body.name,
+                email: req.body.email,
+                rol_id: 4,
+                password: bcrypt.hashSync(req.body.password, 10),
+                avatar: req.file ? req.file.filename : "default-image.png"
             })
+            .then((user) => {
+                res.send(user)
+            })
+            .catch(error => res.send(error))
         }else{
             //Código para mostrar errores
             res.render('users/register', {
