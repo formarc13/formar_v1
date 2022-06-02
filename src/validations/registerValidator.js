@@ -1,5 +1,4 @@
 const { check, body } = require('express-validator');
-const res = require('express/lib/response');
 const db = require("../database/models");
 
 let validateRegister = [
