@@ -62,8 +62,9 @@ module.exports = {
       
         //Si no hay errores, crea el usuario
         if(errors.isEmpty()){
-            
-
+            db.User.create({
+                
+            })
         }else{
             //Código para mostrar errores
             res.render('users/register', {

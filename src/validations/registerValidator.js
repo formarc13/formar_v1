@@ -9,7 +9,7 @@ let validateRegister = [
         .notEmpty().withMessage("El email es requerido").bail()
         .isEmail().withMessage("Ingrese un email válido"),
     body("email").custom((value)=>{
-        db.User.findOne({
+        return db.User.findOne({
             where: {
                 email: value,
             }
@@ -19,7 +19,6 @@ let validateRegister = [
                 return Promise.reject("Email ya registrado")
             }
         })
-        .catch(error => res.send(error))
     }),
     check("password")
         .notEmpty().withMessage("Ingrese una contraseña")
