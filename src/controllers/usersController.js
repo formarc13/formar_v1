@@ -1,6 +1,7 @@
 const {users, writeUsers} = require('../data');
 const { validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
+const db = require("../database/models");
 
 module.exports = {
     login: (req, res) => {
@@ -61,38 +62,7 @@ module.exports = {
       
         //Si no hay errores, crea el usuario
         if(errors.isEmpty()){
-            //Código para crear usuario
-
-            //Registrar un usuario - Guardarlo en el JSON
-            // Paso 1 - Crear un objeto User
-
-            let lastId = 0;
-            users.forEach(user => {
-                if(user.id > lastId){
-                    lastId = user.id
-                }
-            });
-
-            let newUser = {
-                id: lastId + 1,
-                name: req.body.name,
-                email: req.body.email,
-                password: bcrypt.hashSync(req.body.password, 10),
-                avatar: req.file ? req.file.filename : "default-image.png",
-                rol: "USER"
-            }
-
-            // Paso 2 - Guardar el nuevo usuario en el array de usuarios
-
-            users.push(newUser)
-
-            // Paso 3 - Escribir el JSON de usuarios con el array actual
-
-            writeUsers(users)
-
-            // Paso 4 - Devolver respuesta (redirección)
-
-            res.redirect('/usuarios/login')
+            
 
         }else{
             //Código para mostrar errores
