@@ -7,6 +7,10 @@ module.exports = (sequelize, dataTypes) => {
             autoIncrement: true,
             allowNull: false,
         },
+        name: {
+            type: dataTypes.STRING(45),
+            allowNull: false,
+        },
         price: {
             type: dataTypes.INTEGER(11),
             allowNull: false,
@@ -30,13 +34,6 @@ module.exports = (sequelize, dataTypes) => {
             type: dataTypes.TEXT,
             allowNull: false,
         },
-        image: {
-            type: dataTypes.STRING(100),
-        },
-        name: {
-            type: dataTypes.STRING(100),
-            allowNull: false,
-        },
     }
     let config = {
         tableName: "products",
@@ -45,6 +42,20 @@ module.exports = (sequelize, dataTypes) => {
 
     const Product = sequelize.define(alias, cols, config);
 
+    Product.associate = (models) => {
+        Product.belongsTo(models.Project, {
+            as: "project",
+            foreignKey: "project_id",
+        })
+        Product.belongsTo(models.Category, {
+            as: "category",
+            foreignKey: "category_id",
+        })
+        Product.hasMany(models.ProductImage, {
+            as: "productImages",
+            foreignKey: "product_id",
+        })
+    }
 
     return Product;
 }
