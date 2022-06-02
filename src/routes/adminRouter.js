@@ -54,7 +54,7 @@ router.get('/categorias/agregar'/* ,userSessionCheck, adminCheck */, adminCatego
 /* POST - Crea un emprendimiento en la DB */
 router.post('/categorias', adminCategoriesController.categoryCreate);
 /* GET - Editar emprendimiento */
-router.get('/categorias/editar/:id',userSessionCheck, adminCheck, adminCategoriesController.categoryEdit);
+router.get('/categorias/editar/:id',/* userSessionCheck, adminCheck, */ adminCategoriesController.categoryEdit);
 /* PUT - Actualiza emprendimiento en la DB */
 router.put('/categorias/:id', adminCategoriesController.categoryUpdate);
 /* DELETE - Elimina un emprendimiento */
