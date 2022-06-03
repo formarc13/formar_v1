@@ -1,5 +1,7 @@
 const { check, body } = require('express-validator');
-const {users} = require('../data');
+const res = require('express/lib/response');
+//const {users} = require('../data');
+const db = require('../database/models')
 
 let validateRegister = [
     check("name")
@@ -9,12 +11,16 @@ let validateRegister = [
         .notEmpty().withMessage("El email es requerido").bail()
         .isEmail().withMessage("Ingrese un email válido"),
     body("email").custom((value)=>{
-        let user = users.find(user => user.email === value);
-        if(user){
-            return false;
-        }
-        return true;
-    }).withMessage("Email ya registrado"),
+        db.User.findOne({
+            where: {
+                email: value
+            }
+        }).then((user) => {
+            if(user){
+                return Promise.reject('Email ya registrado')
+            }
+        })
+    }),
     check("password")
         .notEmpty().withMessage("Ingrese una contraseña")
         .isLength({min: 8}).withMessage("La contraseña debe tener por lo menos 8 caracteres"), 
