@@ -5,6 +5,7 @@ const uploadFile = require('../middlewares/uploadAvatar');
 const registerValidator = require('../validations/registerValidator');
 const loginValidator = require('../validations/loginValidator');
 const userInSessionCheck = require('../middlewares/userInSessionCheck');
+const userSessionCheck = require("../middlewares/userSessionCheck")
 
 /* GET - Renderiza vista login */
 router.get('/login', userInSessionCheck, usersController.login);
@@ -15,7 +16,7 @@ router.get('/registro', userInSessionCheck, usersController.register);
 /* POST - Crea un nnuevo usuario */
 router.post('/registro', uploadFile.single('avatar'), registerValidator, usersController.processRegister)
 /* GET - Perfil de usuario */
-router.get('/perfil', usersController.profile);
+router.get('/perfil', userSessionCheck, usersController.profile);
 /* POST - Creación de dirección */
 router.post('/direcciones', usersController.addressCreate);
 /* DELETE - Eliminación de dirección */

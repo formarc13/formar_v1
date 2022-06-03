@@ -89,13 +89,39 @@ module.exports = {
         }
     },
     profile: (req, res) => {
-
+        db.User.findOne({
+            where: {
+                id: req.session.user.id
+            },
+            include: [{ association: "addresses" }],
+        })
+        .then((user) => {
+            res.render("users/userProfile", {
+                session: req.session,
+                user,
+                titulo: req.session.user.name,
+                css: "userProfile.css"
+            })
+        })
     },
     addressCreate: (req, res) => {
-
+        db.Address.create({
+            ...req.body,
+            user_id: req.session.user.id,
+        })
+        .then(() => res.redirect("/usuarios/perfil"))
+        .catch((error) => res.send(error))
     },
     addressDestroy: (req, res) => {
-
+        db.Address.destroy({
+            where: {
+                id: req.params.id,
+            }
+        })
+        .then(() => {
+            res.redirect("/usuarios/perfil")    
+        })
+        .catch((error) => res.send(error))
     },
     logout: (req, res) => {
         req.session.destroy();

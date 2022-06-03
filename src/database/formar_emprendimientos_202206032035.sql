@@ -32,7 +32,7 @@ CREATE TABLE `addresses` (
   PRIMARY KEY (`id`),
   KEY `NewTable_FK` (`user_id`),
   CONSTRAINT `NewTable_FK` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,6 +41,7 @@ CREATE TABLE `addresses` (
 
 LOCK TABLES `addresses` WRITE;
 /*!40000 ALTER TABLE `addresses` DISABLE KEYS */;
+INSERT INTO `addresses` VALUES (1,3,'123','12','',''),(4,4,'Calle false','123','','');
 /*!40000 ALTER TABLE `addresses` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -197,10 +198,11 @@ CREATE TABLE `users` (
   `email` varchar(45) NOT NULL,
   `password` varchar(70) NOT NULL,
   `avatar` varchar(45) DEFAULT NULL,
+  `phone` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_86` (`rol_id`),
   CONSTRAINT `users_FK` FOREIGN KEY (`rol_id`) REFERENCES `users_rols` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -209,7 +211,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Prueba',4,'prueba@mail.com','$2a$10$0hGVre88jc/srUqoOFM8Z.8ueMonj2WcAoVgRd8Nf.3rBK29UAcXC','1654213930774_img_.png'),(2,'Prueba 2',4,'prueba2@mail.com','$2a$10$G/K6qFckIkEDAyPvr1rNaOxhd78bnf4Cx591f/pfqk5Hv53t5vzQK','1654214344805_img_.png'),(3,'Jona',4,'mail2@mail.com','$2a$10$u//LR1XteQTdKuHayw8uiOuA.zc.EkqwllNwkPZS9fgld8TK/feCy','default-image.png');
+INSERT INTO `users` VALUES (1,'Prueba',4,'prueba@mail.com','$2a$10$0hGVre88jc/srUqoOFM8Z.8ueMonj2WcAoVgRd8Nf.3rBK29UAcXC','1654213930774_img_.png',NULL),(2,'Prueba 2',4,'prueba2@mail.com','$2a$10$G/K6qFckIkEDAyPvr1rNaOxhd78bnf4Cx591f/pfqk5Hv53t5vzQK','1654214344805_img_.png',NULL),(3,'Jona',4,'mail2@mail.com','$2a$10$u//LR1XteQTdKuHayw8uiOuA.zc.EkqwllNwkPZS9fgld8TK/feCy','default-image.png',NULL),(4,'Jona',4,'mail3@mail.com','$2a$10$Vxpe7fScNsnLJFOSblPmRuJGg8t1yZTmhtRIEb3UV2flnHY76jc36','1654296521713_img_.jpg',NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -250,4 +252,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-03  8:37:11
+-- Dump completed on 2022-06-03 20:35:17
