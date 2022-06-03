@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head')%>
+  <body>
+    <%- include('../partials/header')%>
+    <main class="userProfile">
+      <div class="avatar">
+        <img src="/images/usuarios/<%= user.avatar %>" alt="" />
+      </div>
+      <div class="userProfile-container">
+        <div class="userProfile_box">
+          <h3 class="userProfile_title">Datos personales</h3>
+          <p class="userProfile_item">Nombre: <%= user.name %></p>
+          <p class="userProfile_item">Email: <%= user.email %></p>
+          <p class="userProfile_item">
+            Teléfono: <%= user.phone ? user.phone : "------" %>
+          </p>
+        </div>
+        <div class="userProfile_box">
+            <form action="/usuarios/direcciones" method="post">
+                <div class="form--group">
+                    <label for="street">Calle</label>
+                    <input type="text" name="street" id="street" value="<%= locals.old && old.street %>">
+                    <% if (locals.errors && errors.street) { %>
+                        <small class="text-danger"><%= errors.street.msg %></small>
+                    <% } %>
+                </div>
+                <div class="form--group">
+                    <label for="number">Número</label>
+                    <input type="text" name="number" id="number" value="<%= locals.old && old.number %>">
+                    <% if (locals.errors && errors.number) { %>
+                        <small class="text-danger"><%= errors.number.msg %></small>
+                    <% } %>
+                </div>
+                <div class="form--group">
+                  <select name="province" >
+                      <option value="" hidden selected>Provincia</option>
+                  </select>
+                  <% if (locals.errors && errors.province) { %>
+                    <small class="text-danger"><%= errors.province.msg %></small>
+                <% } %>
+                </div>
+                <div class="form--group">
+                  <select name="city" >
+                      <option value="" hidden selected>Ciudad</option>
+                  </select>
+                  <% if (locals.errors && errors.city) { %>
+                    <small class="text-danger"><%= errors.city.msg %></small>
+                <% } %>
+                </div>
+                <button type="submit">
+                    Agregar
+                </button>
+            </form>
+             <% if (user.addresses.length > 0) { %>
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Calle</th>
+                        <th scope="col">Número</th>
+                        <th scope="col">Provincia</th>
+                        <th scope="col">Ciudad</th>
+                        <th scope="col">Eliminar</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <% user.addresses.forEach(address => { %>
+                            <tr>
+                              <th scope="row"><%- address.id %></th>
+                              <td><%- address.street %></td>
+                              <td><%- address.number %></td>
+                              <td><%- address.province %></td>
+                              <td><%- address.city %></td>
+                              <td>
+                                <form action="/usuarios/direcciones/<%- address.id %>?_method=DELETE" method="POST">
+                                    <button type="submit">Eliminar</button>
+                                </form>  
+                                </td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                  </table>
+             <% } %>   
+           
+        </div>
+        <a href="/users/profile/edit/<%= user.id %>" class="btn btn-ad-primary"
+          >EDITAR DATOS</a
+        >
+      </div>
+    </main>
+    <%- include('../partials/footer')%>
+  </body>
+</html>
