@@ -48,9 +48,9 @@ router.delete('/emprendimientos/eliminar/:id', adminProjectsController.projectDe
 /* CRUD CATEGORIAS */
 /* =============== */
 
-router.get('/categorias',userSessionCheck, adminCheck, adminCategoriesController.list);
+router.get('/categorias'/* ,userSessionCheck, adminCheck */, adminCategoriesController.list);
 /* GET - Agregar emprendimiento */
-router.get('/categorias/agregar',userSessionCheck, adminCheck, adminCategoriesController.categoryAdd);
+router.get('/categorias/agregar'/* ,userSessionCheck, adminCheck */, adminCategoriesController.categoryAdd);
 /* POST - Crea un emprendimiento en la DB */
 router.post('/categorias', adminCategoriesController.categoryCreate);
 /* GET - Editar emprendimiento */
