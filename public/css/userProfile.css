@@ -1,0 +1,12 @@
+.userProfile .avatar {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+}
+
+.userProfile .avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}

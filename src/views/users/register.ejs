@@ -12,14 +12,14 @@
             <p class="text-end">¿Ya estás registrado? <a href="/usuarios/login">¡Logueate!</a></p>
             <div class="form--group">
                 <label for="name">Nombre y apellido</label>
-                <input type="text" name="name" id="name">
+                <input type="text" name="name" id="name" value="<%= locals.old && old.name %>">
                 <% if (locals.errors && errors.name) { %>
                     <small class="text-danger"><%= errors.name.msg %></small>
                 <% } %>
             </div>
             <div class="form--group">
                 <label for="email">Email</label>
-                <input type="email" name="email" id="email">
+                <input type="email" name="email" id="email" value="<%= locals.old && old.email %>">
                 <% if (locals.errors && errors.email) { %>
                     <small class="text-danger"><%= errors.email.msg %></small>
                 <% } %>

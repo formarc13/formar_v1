@@ -5,7 +5,6 @@ const db = require("../database/models");
 
 module.exports = {
     login: (req, res) => {
-
         res.render('users/login', {
             titulo: "Login",
             css: "userForms.css",
@@ -16,30 +15,35 @@ module.exports = {
         let errors = validationResult(req);
         if(errors.isEmpty()){
             //Levantar sesión
-            let user = users.find(user => user.email === req.body.email);
-
-            req.session.user = {
-                id: user.id,
-                name: user.name,
-                avatar: user.avatar,
-                email: user.email,
-                rol: user.rol
-            }
-
-            if(req.body.remember){
-                const TIME_IN_MILISECONDS = 60000;
-                res.cookie('formarCookie', req.session.user, {
-                    expires: new Date(Date.now() + TIME_IN_MILISECONDS),
-                    httpOnly: true,
-                    secure: true
-                })
-            }
-
-            res.locals.user = req.session.user
-
-            res.redirect('/')
+            db.User.findOne({
+                where: {
+                    email: req.body.email
+                }
+            })
+            .then((user) => {
+                req.session.user = {
+                    id: user.id,
+                    name: user.name,
+                    avatar: user.avatar,
+                    email: user.email,
+                    rol: user.rol_id
+                }
+    
+                if(req.body.remember){
+                    const TIME_IN_MILISECONDS = 60000;
+                    res.cookie('formarCookie', req.session.user, {
+                        expires: new Date(Date.now() + TIME_IN_MILISECONDS),
+                        httpOnly: true,
+                        secure: true
+                    })
+                }
+    
+                res.locals.user = req.session.user
+    
+                res.redirect('/')
+            })
+            .catch(error => console.log(error))
         }else{
-            
             res.render('users/login', {
                 titulo: "Login",
                 css: "userForms.css",
@@ -70,7 +74,7 @@ module.exports = {
                 avatar: req.file ? req.file.filename : "default-image.png"
             })
             .then((user) => {
-                res.send(user)
+                res.redirect("/usuarios/login")
             })
             .catch(error => res.send(error))
         }else{
@@ -79,9 +83,19 @@ module.exports = {
                 titulo: "Registro",
                 css: "userForms.css",
                 errors: errors.mapped(),
-                session: req.session
+                session: req.session,
+                old: req.body
             })
         }
+    },
+    profile: (req, res) => {
+
+    },
+    addressCreate: (req, res) => {
+
+    },
+    addressDestroy: (req, res) => {
+
     },
     logout: (req, res) => {
         req.session.destroy();
