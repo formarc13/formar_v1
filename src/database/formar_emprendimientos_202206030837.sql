@@ -16,6 +16,35 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `addresses`
+--
+
+DROP TABLE IF EXISTS `addresses`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `addresses` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `street` varchar(50) NOT NULL,
+  `number` varchar(100) NOT NULL,
+  `province` varchar(100) NOT NULL,
+  `city` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `NewTable_FK` (`user_id`),
+  CONSTRAINT `NewTable_FK` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `addresses`
+--
+
+LOCK TABLES `addresses` WRITE;
+/*!40000 ALTER TABLE `addresses` DISABLE KEYS */;
+/*!40000 ALTER TABLE `addresses` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `categories`
 --
 
@@ -171,7 +200,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   KEY `FK_86` (`rol_id`),
   CONSTRAINT `users_FK` FOREIGN KEY (`rol_id`) REFERENCES `users_rols` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -180,7 +209,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Prueba',4,'prueba@mail.com','$2a$10$0hGVre88jc/srUqoOFM8Z.8ueMonj2WcAoVgRd8Nf.3rBK29UAcXC','1654213930774_img_.png');
+INSERT INTO `users` VALUES (1,'Prueba',4,'prueba@mail.com','$2a$10$0hGVre88jc/srUqoOFM8Z.8ueMonj2WcAoVgRd8Nf.3rBK29UAcXC','1654213930774_img_.png'),(2,'Prueba 2',4,'prueba2@mail.com','$2a$10$G/K6qFckIkEDAyPvr1rNaOxhd78bnf4Cx591f/pfqk5Hv53t5vzQK','1654214344805_img_.png'),(3,'Jona',4,'mail2@mail.com','$2a$10$u//LR1XteQTdKuHayw8uiOuA.zc.EkqwllNwkPZS9fgld8TK/feCy','default-image.png');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -221,4 +250,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-02 20:58:19
+-- Dump completed on 2022-06-03  8:37:11

@@ -14,6 +14,12 @@ router.post('/login', loginValidator, usersController.processLogin);
 router.get('/registro', userInSessionCheck, usersController.register);
 /* POST - Crea un nnuevo usuario */
 router.post('/registro', uploadFile.single('avatar'), registerValidator, usersController.processRegister)
+/* GET - Perfil de usuario */
+router.get('/perfil', usersController.profile);
+/* POST - Creación de dirección */
+router.post('/direcciones', usersController.addressCreate);
+/* DELETE - Eliminación de dirección */
+router.delete('/direcciones/:id', usersController.addressDestroy);
 /* GET - Logout */
 router.get('/logout', usersController.logout);
 
