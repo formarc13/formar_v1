@@ -26,6 +26,9 @@ module.exports = (sequelize, dataTypes) => {
         },
         avatar: {
             type: dataTypes.STRING(45),
+        },
+        phone: {
+            type: dataTypes.STRING(100),
         }
     };
 

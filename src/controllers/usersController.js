@@ -104,6 +104,39 @@ module.exports = {
             })
         })
     },
+    profileUpdate: (req, res) => {
+        let errors = validationResult(req);
+
+        if(errors.isEmpty()){
+            db.User.update({
+                ...req.body
+            },{
+                where: {
+                    id: req.session.user.id
+                }
+            })
+            .then(() => 
+                res.redirect("/usuarios/perfil")
+            )
+            .catch(error => res.send(error))
+        }else{
+            db.User.findOne({
+                where: {
+                    id: req.session.user.id
+                },
+                include: [{ association: "addresses" }],
+            })
+            .then((user) => {
+                res.render("users/userProfile", {
+                    session: req.session,
+                    user,
+                    titulo: req.session.user.name,
+                    css: "userProfile.css",
+                    errors: errors.mapped()
+                })
+            })
+        }
+    },
     addressCreate: (req, res) => {
         db.Address.create({
             ...req.body,
