@@ -1,4 +1,5 @@
 const {projects, writeProjects} = require('../../data');
+const { validationResult } = require('express-validator');
 
 module.exports = {
     /* Envia la vista de listado de emprendimientos */
@@ -14,24 +15,13 @@ module.exports = {
     },
     /* Recibe los datos del form de creación y guarda el emprendimiento en la DB */
     projectCreate: (req, res) => {
-      let lastId = 0;
-      projects.forEach(emprendimiento => {
-        if(emprendimiento.id > lastId){
-          lastId = emprendimiento.id
-        }
-      });
+     let errors = validationResult(req);
 
-      let newProject = {
-        ...req.body,
-        id: lastId + 1,
-        members: []
-      };
+     if(errors.isEmpty()){
 
-      projects.push(newProject);
+     }else{
 
-      writeProjects(projects);
-
-      res.redirect('/admin/emprendimientos');
+     }
     },
     /* Envia la vista de form de edición de emprendimiento */
     projectEdit: (req, res) => {
@@ -46,21 +36,13 @@ module.exports = {
     },
     /* Recibe los datos actualizados del form de edición */
     projectUpdate: (req, res) => {
-      let projectId = +req.params.id;
-      
-      projects.forEach(emprendimiento => {
-        if(emprendimiento.id === projectId){
-          emprendimiento.name = req.body.name
-          emprendimiento.address = req.body.address
-          emprendimiento.phone = req.body.phone
-          emprendimiento.description = req.body.description
-          emprendimiento.categoryId = req.body.categoryId
-        }
-      });
+      let errors = validationResult(req);
 
-      writeProjects(projects);
-
-      res.redirect('/admin/emprendimientos');
+      if(errors.isEmpty()){
+ 
+      }else{
+        
+      }
     },
     /* Recibe la info del emprendimiento a eliminar */
     projectDelete: (req, res) => {
