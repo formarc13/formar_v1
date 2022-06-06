@@ -10,28 +10,31 @@
           <form class="row" action="/admin/emprendimientos/<%= emprendimiento.id %>?_method=PUT" method="POST">
             <div class="mb-3 col-md-6">
               <label for="name" class="form-label">Nombre del emprendimiento</label>
-              <input type="text" name="name" class="form-control" id="name" placeholder="Ej: Microsoft" value="<%= emprendimiento.name %>">
+              <input type="text" name="name" class="form-control" id="name" placeholder="Ej: Microsoft" value="<%= locals.old && old.name ? old.name : emprendimiento.name %>">
+              <% if (locals.errors && errors.name) { %>
+                <small class="text-danger"><%= errors.name.msg%></small>
+              <% } %>
             </div>
             <div class="mb-3 col-md-6">
               <label for="address" class="form-label">Dirección</label>
-              <input type="text" name="address" class="form-control" id="address" placeholder="Ej: Calle falsa 123" value="<%= emprendimiento.address %>">
+              <input type="text" name="address" class="form-control" id="address" placeholder="Ej: Calle falsa 123" value="<%= locals.old && old.address ? old.address : emprendimiento.address %>">
+              <% if (locals.errors && errors.address) { %>
+                <small class="text-danger"><%= errors.address.msg%></small>
+              <% } %>
             </div>
             <div class="mb-3 col-md-6">
               <label for="phone" class="form-label">Teléfono</label>
-              <input type="text" name="phone" class="form-control" id="phone" placeholder="Ej: 1555555555g" value="<%= emprendimiento.phone %>">
-            </div>
-            <div class="mb-3 col-md-6">
-              <label for="category" class="form-label">Categorias</label>
-              <select name="categoryId" class="form-select" id="category" aria-label="Default select example">
-                <option selected hidden>Categoría</option>
-                <option value="1">Textil - Indumentaria</option>
-                <option value="2">Alimentos y bebidas</option>
-                <option value="3">Artesanías</option>
-              </select>
+              <input type="text" name="phone" class="form-control" id="phone" placeholder="Ej: 1555555555g" value="<%= locals.old && old.phone ? old.phone : emprendimiento.phone %>">
+              <% if (locals.errors && errors.phone) { %>
+                <small class="text-danger"><%= errors.phone.msg%></small>
+              <% } %>
             </div>
             <div class="mb-3 ">
               <label for="description" class="form-label">Descripción</label>
-              <textarea name="description" class="form-control" id="description" rows="3"><%= emprendimiento.description %></textarea>
+              <textarea name="description" class="form-control" id="description" rows="3"><%= locals.old && old.description ? old.description : emprendimiento.description %></textarea>
+              <% if (locals.errors && errors.description) { %>
+                <small class="text-danger"><%= errors.description.msg%></small>
+              <% } %>
             </div>
             <div class="col-12">
               <button class="btn btn-success" type="submit">Guardar datos</button>

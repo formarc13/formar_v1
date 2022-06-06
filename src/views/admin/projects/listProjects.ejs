@@ -11,8 +11,6 @@
                 <th scope="col">id</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Dirección</th>
-                <th scope="col">Categoría</th>
-                <th scope="col">Integrantes</th>
                 <th scope="col">Teléfono</th>
                 <th scope="col"></th>
               </tr>
@@ -23,12 +21,6 @@
                   <th scope="row"><%- emprendimiento.id %></th>
                   <td><%- emprendimiento.name %></td>
                   <td><%- emprendimiento.address %></td>
-                  <td><%- emprendimiento.categoryId %></td>
-                  <td>
-                    <% emprendimiento.members.forEach(miembro => { %>
-                      <%- miembro %> 
-                    <% }) %>
-                  </td>
                   <td><%- emprendimiento.phone %></td>
                   <td>
                     <a href="/admin/emprendimientos/editar/<%- emprendimiento.id %> " class="btn btn-success">
