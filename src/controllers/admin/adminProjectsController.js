@@ -20,14 +20,27 @@ module.exports = {
     /* Recibe los datos del form de creación y guarda el emprendimiento en la DB */
     projectCreate: (req, res) => {
      let errors = validationResult(req);
-
+      
      if(errors.isEmpty()){
         db.Project.create({
           ...req.body,
-          user_id: 4 /* req.session.user.id */
+          user_id: 4 
         })
-        .then(() => {
-          res.redirect('/admin/emprendimientos')
+        .then((project) => {
+          if(req.files.length > 0 ){
+            let arrayImages = req.files.map(image => {
+             return {
+               imageName: image.filename,
+               project_id: project.id
+             } 
+            })
+
+            db.ProjectImage.bulkCreate(arrayImages)
+            .then(() => res.redirect('/admin/emprendimientos'))
+            .catch(error => console.log(error))
+          }else{
+            res.redirect('/admin/emprendimientos')
+          }
         })
         .catch(error => console.log(error))
      }else{
@@ -36,7 +49,7 @@ module.exports = {
          errors: errors.mapped(),
          old: req.body
         })
-     }
+     } 
     },
     /* Envia la vista de form de edición de emprendimiento */
     projectEdit: (req, res) => {
@@ -56,25 +69,44 @@ module.exports = {
       let errors = validationResult(req);
 
       if(errors.isEmpty()){
- 
+        db.Project.update({
+          ...req.body,
+          user_id: 4 /* req.session.user.id */
+        },{
+          where: {
+            id: req.params.id,
+          }
+        })
+        .then(() => {
+          res.redirect('/admin/emprendimientos')
+        })
+        .catch(error => console.log(error))
       }else{
-        
+        let projectId = +req.params.id;
+
+        db.Project.findByPk(projectId)
+        .then(emprendimiento => {
+          res.render('admin/projects/editProject', {
+            titulo: "Editar emprendimiento",
+            emprendimiento,
+            errors: errors.mapped(),
+            old: req.body
+          })
+        })
+        .catch(error => console.log(error))
       }
     },
     /* Recibe la info del emprendimiento a eliminar */
     projectDelete: (req, res) => {
-        let projectId = +req.params.id;
+      let projectId = +req.params.id;
 
-        projects.forEach(emprendimiento => {
-            if(emprendimiento.id === projectId){
-                let projectToDeleteIndex = projects.indexOf(emprendimiento);
-                projects.splice(projectToDeleteIndex, 1)
-            }
-        })
-       
-        writeProjects(projects);
-       
-        res.redirect('/admin/emprendimientos')
+      db.Project.destroy({
+        where: {
+          id: projectId
+        }
+      })
+      .then(() => res.redirect('/admin/emprendimientos'))
+      .catch((error) => console.log(error))
     },
     /* Recibe los datos del emprendimiento a buscar */
     projectSearch: (req, res) => {

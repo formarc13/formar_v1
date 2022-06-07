@@ -9,6 +9,7 @@ const productCreateValidator = require('../validations/productCreateValidator');
 const userSessionCheck = require('../middlewares/userSessionCheck');
 const adminCheck = require('../middlewares/adminCheck');
 const projectValidator = require('../validations/projectValidator');
+const uploadProject = require('../middlewares/uploadProjectImages');
 
 /* GET - Index */
 router.get('/', userSessionCheck, adminCheck, adminController.index);
@@ -37,7 +38,7 @@ router.get('/emprendimientos', /* userSessionCheck, adminCheck, */ adminProjects
 /* GET - Agregar emprendimiento */
 router.get('/emprendimientos/agregar', /* userSessionCheck, adminCheck, */ adminProjectsController.projectAdd);
 /* POST - Crea un emprendimiento en la DB */
-router.post('/emprendimientos', projectValidator, adminProjectsController.projectCreate);
+router.post('/emprendimientos', uploadProject.array('images'), projectValidator, adminProjectsController.projectCreate);
 /* GET - Editar emprendimiento */
 router.get('/emprendimientos/editar/:id', /* userSessionCheck, adminCheck, */ adminProjectsController.projectEdit);
 /* PUT - Actualiza emprendimiento en la DB */
