@@ -7,7 +7,7 @@
       <main class="container min-vh-100 pt-5">
         <fieldset class="rounded border w-75 mx-auto p-4">
           <legend class="text-center">EDITAR EMPRENDIMIENTO: <%= emprendimiento.name %> </legend>
-          <form class="row" action="/admin/emprendimientos/<%= emprendimiento.id %>?_method=PUT" method="POST">
+          <form class="row" action="/admin/emprendimientos/<%= emprendimiento.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
             <div class="mb-3 col-md-6">
               <label for="name" class="form-label">Nombre del emprendimiento</label>
               <input type="text" name="name" class="form-control" id="name" placeholder="Ej: Microsoft" value="<%= locals.old && old.name ? old.name : emprendimiento.name %>">
@@ -28,6 +28,15 @@
               <% if (locals.errors && errors.phone) { %>
                 <small class="text-danger"><%= errors.phone.msg%></small>
               <% } %>
+            </div>
+            <div class="mb-3 col-md-6">
+              <div class="mb-3">
+                <label for="image" class="form-label">Seleccione imágenes</label>
+                <input class="form-control" type="file" name="images" id="image" multiple>
+                <% if (locals.errors && errors.images) { %>
+                  <small class="text-danger"><%= errors.images.msg%></small>
+                <% } %>
+              </div>
             </div>
             <div class="mb-3 ">
               <label for="description" class="form-label">Descripción</label>

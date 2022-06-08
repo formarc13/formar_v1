@@ -1,4 +1,4 @@
-const { check, body } = require('express-validator');
+const { check } = require('express-validator');
 
 let validateProject = [
     check("name")
@@ -8,13 +8,7 @@ let validateProject = [
     check("phone")
         .notEmpty().withMessage("Campo requerido"),
     check("description")
-        .notEmpty().withMessage("Campo requerido"),       
-    body("images").custom((value, {req}) => {
-        if(!(req.files.length > 0)){
-            return Promise.reject("Campo requerido")
-        }
-        return true;
-    })     
+        .notEmpty().withMessage("Campo requerido") 
 ]
 
 module.exports = validateProject;

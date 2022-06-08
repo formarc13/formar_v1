@@ -33,6 +33,9 @@
               <div class="mb-3">
                 <label for="image" class="form-label">Seleccione imágenes</label>
                 <input class="form-control" type="file" name="images" id="image" multiple>
+                <% if (locals.errors && errors.images) { %>
+                  <small class="text-danger"><%= errors.images.msg%></small>
+                <% } %>
               </div>
             </div>
             <div class="mb-3 ">

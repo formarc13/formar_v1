@@ -1,6 +1,7 @@
-const {projects, writeProjects} = require('../../data');
 const { validationResult } = require('express-validator');
 const db = require('../../database/models');
+const fs = require('fs');
+const path = require('path');
 
 module.exports = {
     /* Envia la vista de listado de emprendimientos */
@@ -27,7 +28,6 @@ module.exports = {
           user_id: 4 
         })
         .then((project) => {
-          if(req.files.length > 0 ){
             let arrayImages = req.files.map(image => {
              return {
                imageName: image.filename,
@@ -38,9 +38,6 @@ module.exports = {
             db.ProjectImage.bulkCreate(arrayImages)
             .then(() => res.redirect('/admin/emprendimientos'))
             .catch(error => console.log(error))
-          }else{
-            res.redirect('/admin/emprendimientos')
-          }
         })
         .catch(error => console.log(error))
      }else{
@@ -78,12 +75,59 @@ module.exports = {
           }
         })
         .then(() => {
-          res.redirect('/admin/emprendimientos')
+          if(req.files !== undefined){
+            //1 - Preguntar si está subiendo imagenes
+            if(req.files.length > 0){
+              //2 - Traer imágenes del project
+              //2 - a. obtener todas las imágenes del proyecto
+              db.ProjectImage.findAll({
+                where: {
+                  project_id: req.params.id,
+                }
+              })
+              .then((images) => {
+                //2 - b. hacer un array con los nombres de las imagenes.
+                let imageNames = images.map(image => image.imageName);
+                //3 - Eliminar imagenes del servidor
+                imageNames.forEach(image => {
+                  if(fs.existsSync(path.join(__dirname, `../../../public/images/projects/${image}`))){
+                    fs.unlinkSync(path.join(__dirname, `../../../public/images/projects/${image}`))
+                  }else{
+                    console.log("-- No se encontró el archivo");
+                  }
+                });
+                //4 - Eliminar las imágenes de la tabla
+                db.ProjectImage.destroy({
+                  where: {
+                    project_id: req.params.id,
+                  }
+                })
+                .then(() => {
+                  //5 - Cargar nuevas imágenes
+                  let arrayImages = req.files.map(image => {
+                    return {
+                      imageName: image.filename,
+                      project_id: req.params.id
+                    } 
+                   })
+       
+                   db.ProjectImage.bulkCreate(arrayImages)
+                   .then(() => res.redirect('/admin/emprendimientos'))
+                   .catch(error => console.log(error))
+                })
+                .catch(error => console.log(error))
+              })
+              .catch(error => console.log(error))
+            }else{
+              res.redirect('/admin/emprendimientos')
+            }
+          }
         })
         .catch(error => console.log(error))
       }else{
         let projectId = +req.params.id;
 
+        
         db.Project.findByPk(projectId)
         .then(emprendimiento => {
           res.render('admin/projects/editProject', {
@@ -100,12 +144,46 @@ module.exports = {
     projectDelete: (req, res) => {
       let projectId = +req.params.id;
 
-      db.Project.destroy({
+      db.ProjectImage.findAll({
         where: {
-          id: projectId
+          project_id: projectId,
         }
       })
-      .then(() => res.redirect('/admin/emprendimientos'))
+      .then((images) => {
+        let imageNames = images.map(image => image.imageName);
+
+        imageNames.forEach(image => {
+          if(fs.existsSync(path.join(__dirname, `../../../public/images/projects/${image}`))){
+            fs.unlinkSync(path.join(__dirname, `../../../public/images/projects/${image}`))
+          }else{
+            console.log("-- No se encontró el archivo");
+          }
+        });
+
+        db.ProjectImage.destroy({
+          where: {
+            project_id: projectId,
+          }
+        })
+        .then(() => {
+          //Eliminar los productos
+          db.Product.destroy({
+            where: {
+              project_id: projectId,
+            }
+          })
+          .then(() => {
+            db.Project.destroy({
+              where: {
+                id: projectId
+              }
+            })
+            .then(() => res.redirect('/admin/emprendimientos'))
+            .catch((error) => console.log(error))
+          })
+          .catch((error) => console.log(error))
+        })
+      })
       .catch((error) => console.log(error))
     },
     /* Recibe los datos del emprendimiento a buscar */

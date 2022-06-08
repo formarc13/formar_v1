@@ -10,6 +10,7 @@ const userSessionCheck = require('../middlewares/userSessionCheck');
 const adminCheck = require('../middlewares/adminCheck');
 const projectValidator = require('../validations/projectValidator');
 const uploadProject = require('../middlewares/uploadProjectImages');
+const projectEditValidator = require('../validations/projectEditValidator');
 
 /* GET - Index */
 router.get('/', userSessionCheck, adminCheck, adminController.index);
@@ -42,7 +43,7 @@ router.post('/emprendimientos', uploadProject.array('images'), projectValidator,
 /* GET - Editar emprendimiento */
 router.get('/emprendimientos/editar/:id', /* userSessionCheck, adminCheck, */ adminProjectsController.projectEdit);
 /* PUT - Actualiza emprendimiento en la DB */
-router.put('/emprendimientos/:id', projectValidator, adminProjectsController.projectUpdate);
+router.put('/emprendimientos/:id', uploadProject.array('images'), projectEditValidator, adminProjectsController.projectUpdate);
 /* DELETE - Elimina un emprendimiento */
 router.delete('/emprendimientos/eliminar/:id', adminProjectsController.projectDelete);
 
