@@ -67,32 +67,6 @@ module.exports = {
   categoryDelete: (req, res) => {
     let categoryId = +req.params.id;
 
-<<<<<<< HEAD
-      writeCategories(categories);
-
-      res.redirect('/admin/categorias');
-    },
-    /* Recibe la info de la categoria a eliminar */
-    categoryDelete: (req, res) => {
-        let categoryId = +req.params.id;
-
-        categories.forEach(categoria => {
-            if(categoria.id === categoryId){
-                let categoryToDeleteIndex = categories.indexOf(categoria);
-                categories.splice(categoryToDeleteIndex, 1)
-            }
-        })
-       
-        writeCategories(categories);
-       
-        res.redirect('/admin/categorias')
-    },
-    /* Recibe los datos de la categoria a buscar */
-    categorySearch: (req, res) => {
-
-    },
-}
-=======
     db.Category.destroy({
       where: {
         id: categoryId,
@@ -110,4 +84,3 @@ module.exports = {
   /* Recibe los datos de la categoria a buscar */
   categorySearch: (req, res) => {},
 };
->>>>>>> development

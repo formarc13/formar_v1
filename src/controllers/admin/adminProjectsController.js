@@ -1,12 +1,18 @@
-const {projects, writeProjects} = require('../../data');
+const { validationResult } = require('express-validator');
+const db = require('../../database/models');
+const fs = require('fs');
+const path = require('path');
 
 module.exports = {
     /* Envia la vista de listado de emprendimientos */
     list: (req, res) => {
-      res.render('admin/projects/listProjects', {
-          titulo: "Emprendimientos",
-          emprendimientos: projects
-      })
+      db.Project.findAll()
+      .then(projects => {
+        res.render('admin/projects/listProjects', {
+            titulo: "Emprendimientos",
+            emprendimientos: projects
+        })
+      } )
     },
     /* Envia la vista de formulario de creación de emprendimiento */
     projectAdd: (req, res) => {
@@ -14,68 +20,171 @@ module.exports = {
     },
     /* Recibe los datos del form de creación y guarda el emprendimiento en la DB */
     projectCreate: (req, res) => {
-      let lastId = 0;
-      projects.forEach(emprendimiento => {
-        if(emprendimiento.id > lastId){
-          lastId = emprendimiento.id
-        }
-      });
+     let errors = validationResult(req);
+      
+     if(errors.isEmpty()){
+        db.Project.create({
+          ...req.body,
+          user_id: 4 
+        })
+        .then((project) => {
+            let arrayImages = req.files.map(image => {
+             return {
+               imageName: image.filename,
+               project_id: project.id
+             } 
+            })
 
-      let newProject = {
-        ...req.body,
-        id: lastId + 1,
-        members: []
-      };
-
-      projects.push(newProject);
-
-      writeProjects(projects);
-
-      res.redirect('/admin/emprendimientos');
+            db.ProjectImage.bulkCreate(arrayImages)
+            .then(() => res.redirect('/admin/emprendimientos'))
+            .catch(error => console.log(error))
+        })
+        .catch(error => console.log(error))
+     }else{
+       res.render('admin/projects/addProject', { 
+         titulo: "Agregar emprendimiento",
+         errors: errors.mapped(),
+         old: req.body
+        })
+     } 
     },
     /* Envia la vista de form de edición de emprendimiento */
     projectEdit: (req, res) => {
       let projectId = +req.params.id;
 
-      let emprendimiento = projects.find(emprendimiento => emprendimiento.id === projectId)
-
-      res.render('admin/projects/editProject', {
-        titulo: "Editar emprendimiento",
-        emprendimiento
+      db.Project.findByPk(projectId)
+      .then(emprendimiento => {
+        res.render('admin/projects/editProject', {
+          titulo: "Editar emprendimiento",
+          emprendimiento
+        })
       })
+      .catch(error => console.log(error))
     },
     /* Recibe los datos actualizados del form de edición */
     projectUpdate: (req, res) => {
-      let projectId = +req.params.id;
-      
-      projects.forEach(emprendimiento => {
-        if(emprendimiento.id === projectId){
-          emprendimiento.name = req.body.name
-          emprendimiento.address = req.body.address
-          emprendimiento.phone = req.body.phone
-          emprendimiento.description = req.body.description
-          emprendimiento.categoryId = req.body.categoryId
-        }
-      });
+      let errors = validationResult(req);
 
-      writeProjects(projects);
+      if(errors.isEmpty()){
+        db.Project.update({
+          ...req.body,
+          user_id: 4 /* req.session.user.id */
+        },{
+          where: {
+            id: req.params.id,
+          }
+        })
+        .then(() => {
+          if(req.files !== undefined){
+            //1 - Preguntar si está subiendo imagenes
+            if(req.files.length > 0){
+              //2 - Traer imágenes del project
+              //2 - a. obtener todas las imágenes del proyecto
+              db.ProjectImage.findAll({
+                where: {
+                  project_id: req.params.id,
+                }
+              })
+              .then((images) => {
+                //2 - b. hacer un array con los nombres de las imagenes.
+                let imageNames = images.map(image => image.imageName);
+                //3 - Eliminar imagenes del servidor
+                imageNames.forEach(image => {
+                  if(fs.existsSync(path.join(__dirname, `../../../public/images/projects/${image}`))){
+                    fs.unlinkSync(path.join(__dirname, `../../../public/images/projects/${image}`))
+                  }else{
+                    console.log("-- No se encontró el archivo");
+                  }
+                });
+                //4 - Eliminar las imágenes de la tabla
+                db.ProjectImage.destroy({
+                  where: {
+                    project_id: req.params.id,
+                  }
+                })
+                .then(() => {
+                  //5 - Cargar nuevas imágenes
+                  let arrayImages = req.files.map(image => {
+                    return {
+                      imageName: image.filename,
+                      project_id: req.params.id
+                    } 
+                   })
+       
+                   db.ProjectImage.bulkCreate(arrayImages)
+                   .then(() => res.redirect('/admin/emprendimientos'))
+                   .catch(error => console.log(error))
+                })
+                .catch(error => console.log(error))
+              })
+              .catch(error => console.log(error))
+            }else{
+              res.redirect('/admin/emprendimientos')
+            }
+          }
+        })
+        .catch(error => console.log(error))
+      }else{
+        let projectId = +req.params.id;
 
-      res.redirect('/admin/emprendimientos');
+        
+        db.Project.findByPk(projectId)
+        .then(emprendimiento => {
+          res.render('admin/projects/editProject', {
+            titulo: "Editar emprendimiento",
+            emprendimiento,
+            errors: errors.mapped(),
+            old: req.body
+          })
+        })
+        .catch(error => console.log(error))
+      }
     },
     /* Recibe la info del emprendimiento a eliminar */
     projectDelete: (req, res) => {
-        let projectId = +req.params.id;
+      let projectId = +req.params.id;
 
-        projects.forEach(emprendimiento => {
-            if(emprendimiento.id === projectId){
-                let projectToDeleteIndex = projects.indexOf(emprendimiento);
-                projects.splice(projectToDeleteIndex, 1)
-            }
+      db.ProjectImage.findAll({
+        where: {
+          project_id: projectId,
+        }
+      })
+      .then((images) => {
+        let imageNames = images.map(image => image.imageName);
+
+        imageNames.forEach(image => {
+          if(fs.existsSync(path.join(__dirname, `../../../public/images/projects/${image}`))){
+            fs.unlinkSync(path.join(__dirname, `../../../public/images/projects/${image}`))
+          }else{
+            console.log("-- No se encontró el archivo");
+          }
+        });
+
+        db.ProjectImage.destroy({
+          where: {
+            project_id: projectId,
+          }
         })
-       
-        writeProjects(projects);
-       
-        res.redirect('/admin/emprendimientos')
+        .then(() => {
+          //Eliminar los productos
+          db.Product.destroy({
+            where: {
+              project_id: projectId,
+            }
+          })
+          .then(() => {
+            db.Project.destroy({
+              where: {
+                id: projectId
+              }
+            })
+            .then(() => res.redirect('/admin/emprendimientos'))
+            .catch((error) => console.log(error))
+          })
+          .catch((error) => console.log(error))
+        })
+      })
+      .catch((error) => console.log(error))
     },
     /* Recibe los datos del emprendimiento a buscar */
     projectSearch: (req, res) => {

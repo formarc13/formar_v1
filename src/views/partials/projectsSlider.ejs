@@ -1,0 +1,16 @@
+<section class="projects__container">
+    <h2 class="projects__title"> <%= projects_title %> </h2>
+    <div class="projects__container--slider">
+        <% projects.forEach(project => { %>
+            <article class="projects__card">
+                <a href="/projectos/detalle/<%= project.id %> ">
+                    <div class="card__image--container">
+                        <img src="images/projects/<%= project.image %>" alt="">
+                    </div>
+                    <p class="card__name"><%= project.name %> </p>
+                    <p class="card__description"><%= project.description %></p>
+                </a>
+            </article>
+        <% }) %>
+    </div>
+</section>

@@ -8,6 +8,9 @@ const uploadFile = require('../middlewares/uploadProductImage');
 const productCreateValidator = require('../validations/productCreateValidator');
 const userSessionCheck = require('../middlewares/userSessionCheck');
 const adminCheck = require('../middlewares/adminCheck');
+const projectValidator = require('../validations/projectValidator');
+const uploadProject = require('../middlewares/uploadProjectImages');
+const projectEditValidator = require('../validations/projectEditValidator');
 
 /* GET - Index */
 router.get('/', userSessionCheck, adminCheck, adminController.index);
@@ -16,13 +19,13 @@ router.get('/', userSessionCheck, adminCheck, adminController.index);
 /* CRUD PRODUCTOS */
 /* ============== */
 /* GET - Lista de productos */
-router.get('/productos', userSessionCheck, adminCheck, adminProductsController.list);
+router.get('/productos', /* userSessionCheck, adminCheck, */ adminProductsController.list);
 /* GET - Agregar producto */
-router.get('/productos/agregar', userSessionCheck, adminCheck, adminProductsController.productAdd);
+router.get('/productos/agregar', /* userSessionCheck, adminCheck, */ adminProductsController.productAdd);
 /* POST - Crea un producto en la DB */
 router.post('/productos', uploadFile.single('image'), productCreateValidator, adminProductsController.productCreate);
 /* GET - Editar producto */
-router.get('/productos/editar/:id', userSessionCheck, adminCheck, adminProductsController.productEdit);
+router.get('/productos/editar/:id', /* userSessionCheck, adminCheck, */ adminProductsController.productEdit);
 /* PUT - Actualiza producto en la DB */
 router.put('/productos/:id', adminProductsController.productUpdate);
 /* DELETE - Elimina un producto */
@@ -32,15 +35,15 @@ router.delete('/productos/eliminar/:id', adminProductsController.productDelete);
 /* CRUD EMPRENDIMIENTOS */
 /* ==================== */
 /* GET - Lista de emprendimientos */
-router.get('/emprendimientos', userSessionCheck, adminCheck, adminProjectsController.list);
+router.get('/emprendimientos', /* userSessionCheck, adminCheck, */ adminProjectsController.list);
 /* GET - Agregar emprendimiento */
-router.get('/emprendimientos/agregar', userSessionCheck, adminCheck, adminProjectsController.projectAdd);
+router.get('/emprendimientos/agregar', /* userSessionCheck, adminCheck, */ adminProjectsController.projectAdd);
 /* POST - Crea un emprendimiento en la DB */
-router.post('/emprendimientos', adminProjectsController.projectCreate);
+router.post('/emprendimientos', uploadProject.array('images'), projectValidator, adminProjectsController.projectCreate);
 /* GET - Editar emprendimiento */
-router.get('/emprendimientos/editar/:id', userSessionCheck, adminCheck, adminProjectsController.projectEdit);
+router.get('/emprendimientos/editar/:id', /* userSessionCheck, adminCheck, */ adminProjectsController.projectEdit);
 /* PUT - Actualiza emprendimiento en la DB */
-router.put('/emprendimientos/:id', adminProjectsController.projectUpdate);
+router.put('/emprendimientos/:id', uploadProject.array('images'), projectEditValidator, adminProjectsController.projectUpdate);
 /* DELETE - Elimina un emprendimiento */
 router.delete('/emprendimientos/eliminar/:id', adminProjectsController.projectDelete);
 
