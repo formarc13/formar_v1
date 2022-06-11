@@ -1,6 +1,10 @@
 const { check, body } = require('express-validator');
+<<<<<<< HEAD
 const res = require('express/lib/response');
 const db = require('../database/models')
+=======
+const db = require("../database/models");
+>>>>>>> development
 
 let validateRegister = [
     check("name")
@@ -12,11 +16,20 @@ let validateRegister = [
     body("email").custom((value)=>{
         return db.User.findOne({
             where: {
+<<<<<<< HEAD
                 email: value
             }
         }).then((user) => {
             if(user){
                 return Promise.reject('Email ya registrado')
+=======
+                email: value,
+            }
+        })
+        .then((user) => {
+            if(user){
+                return Promise.reject("Email ya registrado")
+>>>>>>> development
             }
         })
     }),
