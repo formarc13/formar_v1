@@ -1,6 +1,7 @@
 const { validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const db = require("../database/models");
+const fetch = require('node-fetch')
 
 module.exports = {
     login: (req, res) => {
@@ -88,20 +89,26 @@ module.exports = {
         }
     },
     profile: (req, res) => {
-        db.User.findOne({
-            where: {
-                id: req.session.user.id
-            },
-            include: [{ association: "addresses" }],
-        })
-        .then((user) => {
-            res.render("users/userProfile", {
-                session: req.session,
-                user,
-                titulo: req.session.user.name,
-                css: "userProfile.css"
+        fetch("https://apis.datos.gob.ar/georef/api/provincias")
+        .then((res) => res.json())
+        .then((data) => {
+            db.User.findOne({
+                where: {
+                    id: req.session.user.id
+                },
+                include: [{ association: "addresses" }],
+            })
+            .then((user) => {
+                res.render("users/userProfile", {
+                    session: req.session,
+                    user,
+                    titulo: req.session.user.name,
+                    css: "userProfile.css",
+                    provincias: data.provincias
+                })
             })
         })
+       
     },
     profileUpdate: (req, res) => {
         let errors = validationResult(req);

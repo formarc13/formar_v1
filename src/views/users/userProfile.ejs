@@ -81,7 +81,10 @@
             </div>
             <div class="mb-3 col-md-6">
               <select class="form-select" name="province">
-                <option value="" hidden selected>Provincia</option>
+                <option value="" hidden selected>Elegi tu provincia</option>
+                <% provincias.forEach(provincia => { %>
+                  <option value="<%- provincia.nombre %>"><%- provincia.nombre %> </option>
+                <% }) %>
               </select>
               <% if (locals.errors && errors.province) { %>
               <small class="text-danger"><%= errors.province.msg %></small>
