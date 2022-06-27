@@ -18,11 +18,11 @@ module.exports = (sequelize, dataTypes) => {
         discount: {
             type: dataTypes.INTEGER(11),
         },
-        category_id: {
+        categoryId: {
             type: dataTypes.INTEGER(11),
             allowNull: false,
         },
-        project_id: {
+        projectId: {
             type: dataTypes.INTEGER(11),
             allowNull: false,
         },
@@ -45,15 +45,15 @@ module.exports = (sequelize, dataTypes) => {
     Product.associate = (models) => {
         Product.belongsTo(models.Project, {
             as: "project",
-            foreignKey: "project_id",
+            foreignKey: "projectId",
         })
         Product.belongsTo(models.Category, {
             as: "category",
-            foreignKey: "category_id",
+            foreignKey: "categoryId",
         })
         Product.hasMany(models.ProductImage, {
             as: "productImages",
-            foreignKey: "product_id",
+            foreignKey: "productId",
         })
     }
 

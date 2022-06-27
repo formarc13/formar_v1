@@ -44,10 +44,6 @@ module.exports = (sequelize, dataTypes) => {
             as: "rol",
             foreignKey: "rol_id"
         })
-        User.hasMany(models.Project, {
-            as: "projects",
-            foreignKey: "user_id"
-        })
         User.hasMany(models.Address, {
             as: "addresses",
             foreignKey: "user_id",

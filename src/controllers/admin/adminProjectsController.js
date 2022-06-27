@@ -24,14 +24,13 @@ module.exports = {
       
      if(errors.isEmpty()){
         db.Project.create({
-          ...req.body,
-          user_id: 4 
+          ...req.body
         })
         .then((project) => {
             let arrayImages = req.files.map(image => {
              return {
                imageName: image.filename,
-               project_id: project.id
+               projectId: project.id
              } 
             })
 
@@ -82,7 +81,7 @@ module.exports = {
               //2 - a. obtener todas las imágenes del proyecto
               db.ProjectImage.findAll({
                 where: {
-                  project_id: req.params.id,
+                  projectId: req.params.id,
                 }
               })
               .then((images) => {
@@ -99,7 +98,7 @@ module.exports = {
                 //4 - Eliminar las imágenes de la tabla
                 db.ProjectImage.destroy({
                   where: {
-                    project_id: req.params.id,
+                    projectId: req.params.id,
                   }
                 })
                 .then(() => {
@@ -146,7 +145,7 @@ module.exports = {
 
       db.ProjectImage.findAll({
         where: {
-          project_id: projectId,
+          projectId: projectId,
         }
       })
       .then((images) => {
@@ -162,14 +161,14 @@ module.exports = {
 
         db.ProjectImage.destroy({
           where: {
-            project_id: projectId,
+            projectId: projectId,
           }
         })
         .then(() => {
           //Eliminar los productos
           db.Product.destroy({
             where: {
-              project_id: projectId,
+              projectId: projectId,
             }
           })
           .then(() => {

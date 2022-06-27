@@ -6,9 +6,9 @@
                 <% if (product.discount > 0) { %>
                     <span class="products__card--discount"><%= product.discount %> %</span>
                 <% } %>
-                <a href="/products/detalle/<%= product.id %> ">
+                <a href="/productos/detalle/<%= product.id %> ">
                     <div class="card__image--container">
-                        <img src="images/products/<%= product.image %>" alt="">
+                        <img src="images/products/<%= product.productImages[0].imageName %>" alt="">
                     </div>
                     <p class="card__name"><%= product.name %> </p>
                     <div class="card__price">

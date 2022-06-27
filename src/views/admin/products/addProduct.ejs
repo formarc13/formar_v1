@@ -33,21 +33,21 @@
               <label for="category" class="form-label">Categorias</label>
               <select name="categoryId" class="form-select" id="category" aria-label="Default select example">
                 <option selected hidden value="">Categoría</option>
-                <option value="1" <%= (locals.old && old.categoryId) && old.categoryId === "1" ? "selected" : "" %>>Textil - Indumentaria</option>
-                <option value="2" <%= (locals.old && old.categoryId) && old.categoryId === "2" ? "selected" : "" %>>Alimentos y bebidas</option>
-                <option value="3" <%= (locals.old && old.categoryId) && old.categoryId === "3" ? "selected" : "" %>>Artesanías</option>
+                <% categories.forEach(category => { %>
+                  <option value="<%- category.id %>" <%= (locals.old && old.categoryId) && old.categoryId === category.id ? "selected" : "" %>><%- category.name %> </option>
+                <% }) %> 
               </select>
               <% if (locals.errors && errors.categoryId) { %>
                 <small class="text-danger"><%= errors.categoryId.msg%></small>
               <% } %>
             </div>
             <div class="mb-3 col-md-6">
-              <label for="project" id="project" class="form-label">Projectos</label>
+              <label for="project" id="project" class="form-label">Emprendimientos</label>
               <select name="projectId" class="form-select" aria-label="Default select example">
-                <option selected hidden value="">Projecto</option>
-                <option value="1"  <%= (locals.old && old.projectId) && old.projectId === "1" ? "selected" : "" %>>Emprendimiento 1</option>
-                <option value="2"  <%= (locals.old && old.projectId) && old.projectId === "2" ? "selected" : "" %>>Emprendimiento 2</option>
-                <option value="3"  <%= (locals.old && old.projectId) && old.projectId === "3" ? "selected" : "" %>>Emprendimiento 3</option>
+                <option selected hidden value="">Emprendimientos</option>
+                <% projects.forEach(project => { %>
+                  <option value="<%- project.id %>"  <%= (locals.old && old.projectId) && old.projectId === project.id ? "selected" : "" %>><%- project.name %> </option>
+                <% }) %>
               </select>
               <% if (locals.errors && errors.projectId) { %>
                 <small class="text-danger"><%= errors.projectId.msg%></small>

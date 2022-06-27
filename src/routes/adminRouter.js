@@ -23,11 +23,11 @@ router.get('/productos', /* userSessionCheck, adminCheck, */ adminProductsContro
 /* GET - Agregar producto */
 router.get('/productos/agregar', /* userSessionCheck, adminCheck, */ adminProductsController.productAdd);
 /* POST - Crea un producto en la DB */
-router.post('/productos', uploadFile.single('image'), productCreateValidator, adminProductsController.productCreate);
+router.post('/productos', uploadFile.array('image'), productCreateValidator, adminProductsController.productCreate);
 /* GET - Editar producto */
 router.get('/productos/editar/:id', /* userSessionCheck, adminCheck, */ adminProductsController.productEdit);
 /* PUT - Actualiza producto en la DB */
-router.put('/productos/:id', adminProductsController.productUpdate);
+router.put('/productos/:id', uploadFile.array('image'), adminProductsController.productUpdate);
 /* DELETE - Elimina un producto */
 router.delete('/productos/eliminar/:id', adminProductsController.productDelete);
 

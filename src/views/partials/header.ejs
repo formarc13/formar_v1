@@ -34,7 +34,7 @@
             <% if (typeof session.user != "undefined") { %>
                 <li><a href="/usuarios/perfil">Mi perfil</a></li>
                 <li><a href="/usuarios/logout">Cerrar sesión</a></li>
-                <% if (session.user.rol === "ADMIN") { %>
+                <% if (session.user.rol == "5") { %>
                     <li><a href="/admin">Admin</a></li>
                 <% } %>
             <% }else{ %> 

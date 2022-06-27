@@ -12,7 +12,7 @@ module.exports = (sequelize, dataTypes) => {
             type: dataTypes.STRING(45),
             allowNull: false,
         },
-        project_id: {
+        projectId: {
             type: dataTypes.INTEGER(11),
             allowNull: false,
         }
@@ -28,7 +28,7 @@ module.exports = (sequelize, dataTypes) => {
     ProjectImage.associate = (models) => {
         ProjectImage.belongsTo(models.Project, {
             as: "project",
-            foreignKey: "project_id"
+            foreignKey: "projectId"
         })
     }
 

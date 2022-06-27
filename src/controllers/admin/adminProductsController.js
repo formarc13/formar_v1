@@ -1,93 +1,169 @@
-const { products, writeProducts } = require('../../data');
 const { validationResult } = require('express-validator');
+const db = require("../../database/models")
 
 module.exports = {
     /* Envia la vista de listado de productos */
     list: (req, res) => {
-        res.render('admin/products/listProducts', {
-            titulo: "Listado de productos",
-            productos: products
+        db.Product.findAll()
+        .then((products)=> {
+            res.render('admin/products/listProducts', {
+                titulo: "Listado de productos",
+                productos: products
+            })
         })
+        .catch(error => console.log(error))
     },
     /* Envia la vista de formulario de creación de producto */
     productAdd: (req, res) => {
-        res.render('admin/products/addProduct', {
-            titulo: "Agregar producto"
-        })
+        let projectsPromise = db.Project.findAll();
+        let categoriesPromise = db.Category.findAll();
+
+        Promise.all([projectsPromise, categoriesPromise])
+        .then(([projects, categories]) => {
+            res.render('admin/products/addProduct', {
+                titulo: "Agregar producto",
+                projects,
+                categories  
+            })
+        } )
     },
     /* Recibe los datos del form de creación y guarda el producto en la DB */
     productCreate: (req, res) => {
         let errors = validationResult(req);
-       
         if(errors.isEmpty()){
             /* 1 - Crear el objeto producto */
-            let lastId = 0;
-            products.forEach(product => {
-                if(product.id > lastId){
-                    lastId = product.id;
-                }
-            });
-
-            let newProduct = {
-                ...req.body, 
-                id: lastId + 1,
-                image: req.file ? req.file.filename : "default-image.png",
-                stock: req.body.stock ? true : false
-            }
-            
-            // Paso 2 - Guardar el nuevo producto en el array de usuarios
-
-            products.push(newProduct)
-
-            // Paso 3 - Escribir el JSON de productos con el array actual
-
-            writeProducts(products)
-
-            // Paso 4 - Devolver respuesta (redirección)
-
-            res.redirect('/admin/productos')
-        }else{
-            res.render('admin/products/addProduct', {
-                titulo: "Agregar producto",
-                errors: errors.mapped(),
-                old: req.body
+            db.Product.create({
+                ...req.body,
+                stock: req.body.stock ? 1 : 0
             })
+            .then((product) => {
+                let arrayImages = req.files.map(image => {
+                    return {
+                      imageName: image.filename,
+                      productId: product.id
+                    } 
+                   })
+       
+                   db.ProductImage.bulkCreate(arrayImages)
+                   .then(() => res.redirect('/admin/productos'))
+                   .catch(error => console.log(error))
+            })
+        }else{
+            let projectsPromise = db.Project.findAll();
+            let categoriesPromise = db.Category.findAll();
+    
+            Promise.all([projectsPromise, categoriesPromise])
+            .then(([projects, categories]) => {
+                res.render('admin/products/addProduct', {
+                    titulo: "Agregar producto",
+                    projects,
+                    categories,
+                    errors: errors.mapped(),
+                    old: req.body 
+                })
+            } )
         }
     },
     /* Envia la vista de form de edición de producto */
     productEdit: (req, res) => {
-        /* 1 - Obtener el id del producto */
         let idProducto = +req.params.id;
-        /* 2 - Buscar el producto a editar */
-        let producto = products.find(producto => producto.id === idProducto)
-        /* 3 - Mostrar el producto en la vista */
-        res.render('admin/products/editProduct', {
+        let productPromise = db.Product.findByPk(idProducto)
+        let projectsPromise = db.Project.findAll();
+        let categoriesPromise = db.Category.findAll();
+
+        Promise.all([productPromise, projectsPromise, categoriesPromise])
+        .then(([producto, projects, categories]) => {
+          res.render('admin/products/editProduct', {
             titulo: "Edición",
-            producto
+            producto,
+            projects, 
+            categories
+          })
         })
+        .catch(error => console.log(error))
     },
     /* Recibe los datos actualizados del form de edición */
     productUpdate: (req, res) => {
-        /* 1 - Obtener el id del producto */
-        let idProducto = +req.params.id;
-        /* 2 - Buscar el producto a editar y modificar el producto */
-        products.forEach(producto => {
-            if(producto.id === idProducto){
-                producto.name = req.body.name
-                producto.price = req.body.price
-                producto.discount = req.body.discount
-                producto.categoryId = req.body.categoryId
-                producto.projectId = req.body.projectId
-                producto.stock = req.body.stock ? true : false
-                producto.description = req.body.description
-            }
+        let errors = validationResult(req);
+
+      if(errors.isEmpty()){
+        db.Product.update({
+          ...req.body,
+          stock: req.body.stock ? 1 : 0
+        },{
+          where: {
+            id: req.params.id,
+          }
         })
+        .then(() => {
+          if(req.files !== undefined){
+            //1 - Preguntar si está subiendo imagenes
+            if(req.files.length > 0){
+              //2 - Traer imágenes del project
+              //2 - a. obtener todas las imágenes del proyecto
+              db.ProductImage.findAll({
+                where: {
+                  productId: req.params.id,
+                }
+              })
+              .then((images) => {
+                //2 - b. hacer un array con los nombres de las imagenes.
+                let imageNames = images.map(image => image.imageName);
+                //3 - Eliminar imagenes del servidor
+                imageNames.forEach(image => {
+                  if(fs.existsSync(path.join(__dirname, `../../../public/images/products/${image}`))){
+                    fs.unlinkSync(path.join(__dirname, `../../../public/images/products/${image}`))
+                  }else{
+                    console.log("-- No se encontró el archivo");
+                  }
+                });
+                //4 - Eliminar las imágenes de la tabla
+                db.ProductImage.destroy({
+                  where: {
+                    productId: req.params.id,
+                  }
+                })
+                .then(() => {
+                  //5 - Cargar nuevas imágenes
+                  let arrayImages = req.files.map(image => {
+                    return {
+                      imageName: image.filename,
+                      producId: req.params.id
+                    } 
+                   })
+       
+                   db.ProductImage.bulkCreate(arrayImages)
+                   .then(() => res.redirect('/admin/productos'))
+                   .catch(error => console.log(error))
+                })
+                .catch(error => console.log(error))
+              })
+              .catch(error => console.log(error))
+            }else{
+              res.redirect('/admin/productos')
+            }
+          }
+        })
+        .catch(error => console.log(error))
+      }else{
+        let idProducto = +req.params.id;
+        let productPromise = db.Product.findByPk(idProducto)
+        let projectsPromise = db.Project.findAll();
+        let categoriesPromise = db.Category.findAll();
 
-        /* 3 - Guardar los cambios */
-        writeProducts(products);
-
-        /* 4 - Respuesta */
-        res.redirect('/admin/productos');
+        Promise.all([productPromise, projectsPromise, categoriesPromise])
+        .then(([producto, projects, categories]) => {
+          res.render('admin/products/editProduct', {
+            titulo: "Edición",
+            producto,
+            projects, 
+            categories,
+            errors: errors.mapped(),
+            old: req.body
+          })
+        })
+        .catch(error => console.log(error))
+      }
     },
     /* Recibe la info del producto a eliminar */
     productDelete: (req, res) => {
