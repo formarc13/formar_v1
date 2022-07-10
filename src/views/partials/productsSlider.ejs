@@ -20,6 +20,9 @@
                     </div>
                     <p class="card__description"><%= product.description %></p>
                 </a>
+                <% if (typeof session.user !== "undefined") { %>
+                    <button class="btn btn-primary" onclick="addToCart(product)">Agregar al carrito</button>
+                <% } %>
             </article>
         <% }) %>
     </div>

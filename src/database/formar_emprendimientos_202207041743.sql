@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: formar_emprendimientos
 -- ------------------------------------------------------
--- Server version	5.5.5-10.4.20-MariaDB
+-- Server version	5.5.5-10.4.24-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -43,6 +43,59 @@ LOCK TABLES `addresses` WRITE;
 /*!40000 ALTER TABLE `addresses` DISABLE KEYS */;
 INSERT INTO `addresses` VALUES (1,3,'123','12','',''),(4,4,'Calle false','123','','');
 /*!40000 ALTER TABLE `addresses` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `cart`
+--
+
+DROP TABLE IF EXISTS `cart`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cart` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `cart_FK` (`userId`),
+  CONSTRAINT `cart_FK` FOREIGN KEY (`userId`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cart`
+--
+
+LOCK TABLES `cart` WRITE;
+/*!40000 ALTER TABLE `cart` DISABLE KEYS */;
+/*!40000 ALTER TABLE `cart` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `cart_item`
+--
+
+DROP TABLE IF EXISTS `cart_item`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cart_item` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cartId` int(11) NOT NULL,
+  `productId` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `cart_item_FK` (`cartId`),
+  KEY `cart_item_FK_1` (`productId`),
+  CONSTRAINT `cart_item_FK` FOREIGN KEY (`cartId`) REFERENCES `cart` (`id`),
+  CONSTRAINT `cart_item_FK_1` FOREIGN KEY (`productId`) REFERENCES `products` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cart_item`
+--
+
+LOCK TABLES `cart_item` WRITE;
+/*!40000 ALTER TABLE `cart_item` DISABLE KEYS */;
+/*!40000 ALTER TABLE `cart_item` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -251,4 +304,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-30 17:31:43
+-- Dump completed on 2022-07-04 17:43:30

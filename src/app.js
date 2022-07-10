@@ -14,6 +14,7 @@ const indexRouter = require('./routes/index');
 const productsRouter = require('./routes/products');
 const usersRouter = require('./routes/users');
 const adminRouter = require('./routes/adminRouter');
+const productCartRouter = require('./routes/api/productCartRouter');
 
 /* Middlewares de aplicación */
 app.use(express.static(path.join(__dirname, '../public')));
@@ -40,6 +41,7 @@ app.use('/', indexRouter); // HOME - Contact
 app.use('/productos', productsRouter); // Listado, detalle
 app.use('/usuarios', usersRouter); //Login, registro, perfil
 app.use('/admin', adminRouter); // Admin, ABM Productos, ABM Projectos
+app.use('/api', productCartRouter); // Admin, ABM Productos, ABM Projectos
 
 app.listen(PORT, () => console.log(`
 Server listen port ${PORT}
